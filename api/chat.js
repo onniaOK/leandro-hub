@@ -103,39 +103,44 @@ export default async function handler(req, res) {
     parts: [{ text: m.content }],
   }));
 
-  try {
-    const apiKey = process.env.GEMINI_API_KEY;
-    const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`;
+  const apiKey = process.env.GEMINI_API_KEY;
+  const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`;
+  const body = JSON.stringify({
+    system_instruction: { parts: [{ text: SYSTEM_PROMPT }] },
+    contents: geminiContents,
+    generationConfig: {
+      maxOutputTokens: 600,
+      temperature: 0.7,
+      thinkingConfig: { thinkingBudget: 0 },
+    },
+  });
 
-    const response = await fetch(url, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        system_instruction: {
-          parts: [{ text: SYSTEM_PROMPT }],
-        },
-        contents: geminiContents,
-        generationConfig: {
-          maxOutputTokens: 600,
-          temperature: 0.7,
-          thinkingConfig: { thinkingBudget: 0 },
-        },
-      }),
-    });
+  for (let attempt = 0; attempt < 3; attempt++) {
+    try {
+      const response = await fetch(url, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body,
+      });
 
-    if (!response.ok) {
-      const err = await response.text();
-      console.error('Gemini API error:', err);
-      return res.status(502).json({ error: 'Upstream API error' });
+      if (response.status === 503 || response.status === 429) {
+        if (attempt < 2) { await new Promise(r => setTimeout(r, 1500)); continue; }
+      }
+
+      if (!response.ok) {
+        const err = await response.text();
+        console.error('Gemini API error:', err);
+        return res.status(502).json({ error: 'Upstream API error' });
+      }
+
+      const data = await response.json();
+      const reply = data.candidates?.[0]?.content?.parts?.[0]?.text || 'No response from ONNIA node.';
+      return res.status(200).json({ reply });
+
+    } catch (error) {
+      console.error('Handler error:', error);
+      if (attempt < 2) { await new Promise(r => setTimeout(r, 1500)); continue; }
+      return res.status(500).json({ error: 'Internal server error' });
     }
-
-    const data = await response.json();
-    const reply = data.candidates?.[0]?.content?.parts?.[0]?.text || 'No response from ONNIA node.';
-
-    return res.status(200).json({ reply });
-
-  } catch (error) {
-    console.error('Handler error:', error);
-    return res.status(500).json({ error: 'Internal server error' });
   }
 }
