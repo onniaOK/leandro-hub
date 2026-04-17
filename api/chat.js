@@ -118,6 +118,7 @@ export default async function handler(req, res) {
         generationConfig: {
           maxOutputTokens: 600,
           temperature: 0.7,
+          thinkingConfig: { thinkingBudget: 0 },
         },
       }),
     });
