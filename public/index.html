@@ -12,6 +12,7 @@
   --green:#00ff88;--gdim:rgba(0,255,136,0.15);--gglow:rgba(0,255,136,0.06);
   --blue:#44aaff;--bdim:rgba(68,170,255,0.2);
   --purple:#aa88ff;--yellow:#ffcc44;--red:#ff4455;
+  --orange:#ff8844;--cyan:#44ddff;
   --white:#e4e4e4;--gray:#b0b0b0;--gray2:#2a2a2a;
   --font:'JetBrains Mono',monospace;
 }
@@ -24,26 +25,21 @@ html,body{width:100%;height:100%;background:var(--bg);color:var(--white);font-fa
 body::after{content:'';position:fixed;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 3px,rgba(0,0,0,0.055) 3px,rgba(0,0,0,0.055) 4px);pointer-events:none;z-index:9000;}
 body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellipse at center,transparent 55%,rgba(0,0,0,0.65) 100%);pointer-events:none;z-index:9001;}
 
-.shell{display:grid;grid-template-rows:50px 1fr 34px;height:100vh;width:100vw;}
+.shell{display:grid;grid-template-rows:56px 1fr 34px;height:100vh;width:100vw;}
 
 /* HEADER */
 header{background:var(--bg2);border-bottom:1px solid var(--border);display:flex;align-items:center;padding:0 14px;gap:14px;position:relative;overflow:hidden;}
 header::after{content:'';position:absolute;bottom:0;left:-100%;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--green),transparent);animation:hline 5s linear infinite;}
 @keyframes hline{0%{left:-100%}100%{left:100%}}
-.h-logo{font-size:13px;font-weight:800;letter-spacing:3px;color:var(--white);border-right:1px solid var(--border2);padding-right:14px;white-space:nowrap;line-height:1.15;}
+.h-logo{font-size:16px;font-weight:800;letter-spacing:4px;color:var(--white);border-right:1px solid var(--border2);padding-right:14px;white-space:nowrap;line-height:1.1;}
 .h-logo span{color:var(--green);}
-.h-logo .fname{display:block;font-size:10px;letter-spacing:2px;font-weight:700;}
+.h-logo .fname{display:block;font-size:12px;letter-spacing:3px;font-weight:700;}
 .h-sub{display:flex;flex-direction:column;gap:1px;border-right:1px solid var(--border2);padding-right:14px;}
 .h-role{font-size:8.5px;color:var(--green);letter-spacing:2px;font-weight:700;}
 .h-spec{font-size:8px;color:var(--gray);letter-spacing:1px;}
 .h-badge{display:flex;align-items:center;gap:6px;padding:3px 9px;border:1px solid var(--gdim);background:var(--gglow);font-size:8.5px;letter-spacing:1.5px;color:var(--green);white-space:nowrap;}
-.h-badge.blue{border-color:var(--bdim);color:var(--blue);background:rgba(68,170,255,0.04);}
-.lang-toggle{display:flex;align-items:center;gap:8px;padding:5px 14px;border:1px solid var(--bdim);background:rgba(68,170,255,0.04);font-size:11px;letter-spacing:2px;color:var(--blue);white-space:nowrap;cursor:pointer;transition:all .2s;user-select:none;font-weight:700;}
-.lang-toggle:hover{border-color:var(--blue);background:rgba(68,170,255,0.12);}
-.lang-toggle .active{color:var(--white);font-weight:800;}
 .dot{width:6px;height:6px;border-radius:50%;flex-shrink:0;background:var(--green);box-shadow:0 0 8px var(--green);animation:dpulse 1.6s ease-in-out infinite;}
 .dot.blue{background:var(--blue);box-shadow:0 0 8px var(--blue);}
-.dot.yellow{background:var(--yellow);box-shadow:0 0 8px var(--yellow);}
 @keyframes dpulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:0.3;transform:scale(0.6)}}
 .h-metrics{display:flex;gap:16px;margin-left:auto;}
 .hm{display:flex;flex-direction:column;gap:1px;}
@@ -51,19 +47,23 @@ header::after{content:'';position:absolute;bottom:0;left:-100%;right:0;height:1p
 .hm-val{color:var(--green);font-weight:700;font-size:10px;}
 .hm-val.b{color:var(--blue);}
 .hm-val.w{color:var(--white);}
-.h-right{display:flex;align-items:center;gap:12px;border-left:1px solid var(--border2);padding-left:14px;}
-.h-clock{font-size:14px;font-weight:800;color:var(--green);letter-spacing:3px;min-width:100px;font-variant-numeric:tabular-nums;}
+.h-right{display:flex;align-items:center;gap:14px;border-left:1px solid var(--border2);padding-left:14px;margin-left:8px;}
+.lang-toggle{display:flex;align-items:center;gap:0;padding:0;border:2px solid var(--border2);background:var(--bg3);font-size:12px;letter-spacing:2px;white-space:nowrap;cursor:pointer;user-select:none;overflow:hidden;}
+.lang-btn{padding:6px 14px;font-family:var(--font);font-size:12px;font-weight:700;letter-spacing:2px;transition:all .2s;color:var(--gray);}
+.lang-btn.active{background:var(--green);color:var(--bg);box-shadow:0 0 12px rgba(0,255,136,0.3);}
+.lang-sep{width:1px;height:100%;background:var(--border2);}
+.h-clock{font-size:15px;font-weight:800;color:var(--green);letter-spacing:3px;min-width:100px;font-variant-numeric:tabular-nums;}
 
-/* MAIN — 3 cols: left panels | career 35% | chat+infra */
-.main{display:grid;grid-template-columns:auto 35% 1fr;overflow:hidden;}
+/* MAIN — 2 rows: top(left+career+chat) bot(topo+charts) */
+.main{display:grid;grid-template-rows:1fr auto;overflow:hidden;}
+.top-row{display:grid;grid-template-columns:auto 35% 1fr;overflow:hidden;}
 
-/* LEFT: 3 stacked panels — shrink to content */
-.left{border-right:1px solid var(--border);display:flex;flex-direction:column;background:var(--bg2);overflow:hidden;min-width:0;max-width:280px;}
+/* LEFT: 3 stacked panels */
+.left{border-right:1px solid var(--border);display:flex;flex-direction:column;background:var(--bg2);overflow:hidden;min-width:0;width:fit-content;max-width:300px;}
 .panel-hdr{padding:7px 10px;border-bottom:1px solid var(--border);background:var(--bg3);display:flex;align-items:center;justify-content:space-between;white-space:nowrap;}
 .panel-hdr-title{font-size:8.5px;letter-spacing:2px;color:var(--green);font-weight:700;}
 .panel-hdr-tag{font-size:8px;color:var(--gray);letter-spacing:1px;}
 
-/* Connection, Skills, Awards panels in left column */
 .conn-panel{border-bottom:1px solid var(--border);display:flex;flex-direction:column;overflow:hidden;flex:1;}
 .conn-list{flex:1;overflow-y:auto;padding:5px 8px;}
 .conn-item{display:flex;align-items:center;justify-content:space-between;padding:4px 0;border-bottom:1px solid var(--border);font-size:9px;white-space:nowrap;}
@@ -81,7 +81,8 @@ header::after{content:'';position:absolute;bottom:0;left:-100%;right:0;height:1p
 .skill-name{font-size:8px;color:var(--white);letter-spacing:.5px;display:flex;justify-content:space-between;white-space:nowrap;}
 .skill-name span{color:var(--green);font-size:8px;}
 .skill-bar-bg{height:3px;background:var(--border2);position:relative;overflow:hidden;}
-.skill-bar{height:100%;background:var(--green);transition:width 1.5s cubic-bezier(.23,1,.32,1);width:0;}
+.skill-bar{height:100%;transition:width 1.5s cubic-bezier(.23,1,.32,1);width:0;opacity:0.55;}
+.skill-bar.g{background:var(--green);}
 .skill-bar.b{background:var(--blue);}
 .skill-bar.p{background:var(--purple);}
 .skill-bar.y{background:var(--yellow);}
@@ -94,39 +95,39 @@ header::after{content:'';position:absolute;bottom:0;left:-100%;right:0;height:1p
 .award-text{color:var(--white);}
 .award-year{font-size:7.5px;color:var(--gray);}
 
-/* CENTER: Career timeline — 35% horizontal scrolling timeline */
+/* CENTER: Career timeline 35% — full height, starts flush left */
 .center{border-right:1px solid var(--border);display:flex;flex-direction:column;overflow:hidden;background:var(--bg2);}
-.career-body{flex:1;overflow-x:auto;overflow-y:hidden;padding:14px 10px;display:flex;gap:0;align-items:stretch;}
-.career-track{display:flex;align-items:flex-start;gap:0;position:relative;min-height:100%;}
-/* the connecting line */
-.career-track::before{content:'';position:absolute;top:18px;left:10px;right:10px;height:2px;background:var(--border2);}
-.tl-card{position:relative;display:flex;flex-direction:column;align-items:center;min-width:130px;max-width:150px;cursor:pointer;flex-shrink:0;padding-top:0;}
-.tl-card-dot{width:12px;height:12px;border-radius:50%;border:2px solid var(--green);background:var(--bg);box-shadow:0 0 8px var(--green);z-index:2;flex-shrink:0;transition:all .2s;}
+.career-body{flex:1;overflow-x:auto;overflow-y:hidden;padding:14px 0 14px 0;display:flex;gap:0;align-items:stretch;}
+.career-track{display:flex;align-items:flex-start;gap:0;position:relative;min-height:100%;padding-left:0;}
+.career-track::before{content:'';position:absolute;top:20px;left:6px;right:6px;height:2px;background:var(--border2);}
+.tl-card{position:relative;display:flex;flex-direction:column;align-items:center;min-width:140px;max-width:160px;cursor:pointer;flex-shrink:0;padding-top:0;}
+.tl-card-dot{width:14px;height:14px;border-radius:50%;border:2px solid var(--green);background:var(--bg);box-shadow:0 0 8px var(--green);z-index:2;flex-shrink:0;transition:all .2s;}
 .tl-card-dot.b{border-color:var(--blue);box-shadow:0 0 8px var(--blue);}
 .tl-card-dot.r{border-color:var(--red);box-shadow:0 0 8px var(--red);}
-.tl-card-dot.y{border-color:var(--yellow);box-shadow:0 0 8px var(--yellow);}
+.tl-card-dot.o{border-color:var(--orange);box-shadow:0 0 8px var(--orange);}
+.tl-card-dot.c{border-color:var(--cyan);box-shadow:0 0 8px var(--cyan);}
 .tl-card-dot.p{border-color:var(--purple);box-shadow:0 0 8px var(--purple);}
+.tl-card-dot.g{border-color:var(--green);box-shadow:0 0 8px var(--green);}
 .tl-card-connector{width:2px;height:10px;background:var(--border2);flex-shrink:0;}
 .tl-card-box{border:1px solid var(--border2);background:var(--bg3);padding:8px 10px;text-align:center;transition:all .2s;width:100%;}
 .tl-card:hover .tl-card-box{border-color:var(--green);box-shadow:0 0 12px var(--gglow);}
 .tl-card:hover .tl-card-dot{transform:scale(1.3);}
-.tl-card-date{font-size:7px;color:var(--gray);letter-spacing:1px;margin-bottom:3px;}
+.tl-card-date{font-size:8px;color:var(--gray);letter-spacing:1px;margin-bottom:3px;}
 .tl-card-date .cur{color:var(--green);}
-.tl-card-company{font-size:10px;font-weight:700;color:var(--white);letter-spacing:1px;}
+.tl-card-company{font-size:12px;font-weight:700;color:var(--white);letter-spacing:1px;}
 .tl-card-company.b{color:var(--blue);}
 .tl-card-company.r{color:var(--red);}
-.tl-card-company.y{color:var(--yellow);}
+.tl-card-company.o{color:var(--orange);}
+.tl-card-company.c{color:var(--cyan);}
 .tl-card-company.p{color:var(--purple);}
-.tl-card-role{font-size:7.5px;color:var(--gray);letter-spacing:.3px;margin-top:2px;white-space:normal;line-height:1.3;}
-.tl-card-desc{font-size:7.5px;color:var(--gray);line-height:1.4;margin-top:6px;text-align:left;white-space:normal;display:none;border-top:1px solid var(--border);padding-top:6px;}
+.tl-card-company.g{color:var(--green);}
+.tl-card-role{font-size:8px;color:var(--gray);letter-spacing:.3px;margin-top:2px;white-space:normal;line-height:1.3;}
+.tl-card-desc{font-size:8px;color:var(--gray);line-height:1.4;margin-top:6px;text-align:left;white-space:normal;display:none;border-top:1px solid var(--border);padding-top:6px;}
 .tl-card.open .tl-card-desc{display:block;}
 .tl-card.open .tl-card-box{border-color:var(--green);background:var(--bg4);}
 
-/* RIGHT: chat + infra (smaller) */
-.right{display:grid;grid-template-rows:1fr 150px;overflow:hidden;}
-
-/* CHAT */
-.chat-section{display:flex;flex-direction:column;border-bottom:1px solid var(--border);overflow:hidden;}
+/* RIGHT: IA Agent chat — full height alongside career */
+.chat-section{display:flex;flex-direction:column;overflow:hidden;}
 .chat-log{flex:1;overflow-y:auto;padding:10px;display:flex;flex-direction:column;gap:8px;scrollbar-width:thin;scrollbar-color:var(--gray2) transparent;}
 .chat-log::-webkit-scrollbar{width:3px;}
 .chat-log::-webkit-scrollbar-thumb{background:var(--gray2);}
@@ -151,33 +152,35 @@ header::after{content:'';position:absolute;bottom:0;left:-100%;right:0;height:1p
 .input-wrap:focus-within{border-color:var(--green);box-shadow:0 0 10px var(--gglow);}
 .prompt-sym{color:var(--green);font-size:12px;flex-shrink:0;}
 #chatInput{flex:1;background:none;border:none;outline:none;color:var(--white);font-family:var(--font);font-size:11px;caret-color:var(--green);}
-#chatInput::placeholder{color:var(--gray);}
+#chatInput::placeholder{color:transparent;}
+.input-cursor{color:var(--green);font-size:11px;animation:blinkcur .8s step-end infinite;}
+@keyframes blinkcur{0%,100%{opacity:1}50%{opacity:0}}
 .qbtns{display:flex;flex-wrap:wrap;gap:3px;margin-top:6px;}
 .qbtn{font-size:8px;letter-spacing:.5px;padding:4px 8px;border:1px solid var(--gray2);background:none;color:var(--gray);font-family:var(--font);cursor:pointer;transition:all .15s;}
 .qbtn:hover{border-color:var(--green);color:var(--green);background:var(--gglow);}
 
-/* BOTTOM: TOPOLOGY + CHARTS (compact) */
-.r-bot{display:grid;grid-template-columns:1fr 1fr;overflow:hidden;}
+/* BOTTOM ROW: TOPOLOGY + CHARTS — bigger */
+.bot-row{display:grid;grid-template-columns:1fr 1fr;border-top:1px solid var(--border);height:220px;overflow:hidden;}
 .topo-panel{border-right:1px solid var(--border);display:flex;flex-direction:column;overflow:hidden;}
-.topo-body{flex:1;padding:4px 8px;display:flex;align-items:center;justify-content:center;}
+.topo-body{flex:1;padding:6px 12px;display:flex;align-items:center;justify-content:center;}
 svg.topo{width:100%;height:100%;overflow:visible;}
 .t-node rect{fill:var(--bg3);stroke:var(--border2);stroke-width:1;transition:stroke .2s;}
 .t-node:hover rect{stroke:var(--green);}
-.t-node text{fill:var(--white);font-family:var(--font);font-size:7px;font-weight:500;}
-.t-node .tsub{fill:var(--gray);font-size:6px;}
-.t-node .tgrn{fill:var(--green);font-size:6.5px;}
-.t-node .tbl{fill:var(--blue);font-size:6.5px;}
-.t-node .trd{fill:var(--red);font-size:6.5px;}
+.t-node text{fill:var(--white);font-family:var(--font);font-size:8.5px;font-weight:500;}
+.t-node .tsub{fill:var(--gray);font-size:7px;}
+.t-node .tgrn{fill:var(--green);font-size:8px;}
+.t-node .tbl{fill:var(--blue);font-size:8px;}
+.t-node .trd{fill:var(--red);font-size:8px;}
 .t-edge{stroke:var(--border2);stroke-width:1;fill:none;}
 .t-edge.g{stroke:var(--green);stroke-dasharray:4 3;animation:tdash 1.8s linear infinite;}
 .t-edge.b{stroke:var(--blue);stroke-dasharray:4 3;animation:tdash 2.4s linear infinite;}
 @keyframes tdash{from{stroke-dashoffset:0}to{stroke-dashoffset:-28}}
 
 .charts-grid{display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;gap:1px;background:var(--border);}
-.chart-cell{background:var(--bg2);padding:4px 6px;display:flex;flex-direction:column;gap:1px;overflow:hidden;}
-.ct-title{font-size:7px;letter-spacing:1.5px;color:var(--gray);font-weight:700;}
-.ct-val{font-size:14px;font-weight:800;color:var(--green);line-height:1;}
-.ct-unit{font-size:7px;color:var(--gray);}
+.chart-cell{background:var(--bg2);padding:6px 10px;display:flex;flex-direction:column;gap:2px;overflow:hidden;}
+.ct-title{font-size:8px;letter-spacing:1.5px;color:var(--gray);font-weight:700;}
+.ct-val{font-size:18px;font-weight:800;color:var(--green);line-height:1;}
+.ct-unit{font-size:8px;color:var(--gray);}
 canvas{display:block;width:100%!important;}
 
 /* FOOTER */
@@ -200,21 +203,23 @@ footer{background:var(--bg2);border-top:1px solid var(--border);display:flex;ali
   html,body{overflow:auto;font-size:12px;}
   .shell{display:flex;flex-direction:column;height:auto;min-height:100vh;}
   header{flex-wrap:wrap;padding:8px 10px;gap:6px;height:auto;min-height:auto;}
-  .h-logo{font-size:12px;letter-spacing:2px;border-right:none;padding-right:0;}
+  .h-logo{font-size:14px;letter-spacing:3px;border-right:none;padding-right:0;}
+  .h-logo .fname{font-size:11px;}
   .h-sub{display:none;}
-  .h-badge,.lang-toggle{font-size:9px;padding:4px 10px;}
+  .h-badge,.lang-toggle{font-size:10px;}
+  .lang-btn{padding:5px 10px;font-size:10px;}
   .h-metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;width:100%;margin-left:0;margin-top:4px;}
   .h-right{border-left:none;padding-left:0;}
   .h-clock{font-size:12px;min-width:auto;}
   .main{display:flex;flex-direction:column;overflow:visible;}
-  .left{border-right:none;border-bottom:1px solid var(--border);flex-direction:column;max-width:none;}
+  .top-row{display:flex;flex-direction:column;overflow:visible;}
+  .left{border-right:none;border-bottom:1px solid var(--border);flex-direction:column;max-width:none;width:auto;}
   .center{border-right:none;border-bottom:1px solid var(--border);}
   .career-body{overflow-x:auto;padding:10px;}
-  .right{display:flex;flex-direction:column;overflow:visible;}
   .chat-section{min-height:40vh;}
   .chat-log{min-height:200px;max-height:40vh;}
-  .r-bot{display:flex;flex-direction:column;height:auto;}
-  .topo-panel{border-right:none;border-bottom:1px solid var(--border);min-height:140px;}
+  .bot-row{display:flex;flex-direction:column;height:auto;}
+  .topo-panel{border-right:none;border-bottom:1px solid var(--border);min-height:180px;}
   .charts-grid{grid-template-columns:1fr 1fr;grid-template-rows:auto;}
   footer{flex-wrap:wrap;padding:8px 10px;gap:6px;height:auto;min-height:auto;}
   .f-stack{flex-wrap:wrap;gap:4px;width:100%;}
@@ -223,7 +228,7 @@ footer{background:var(--bg2);border-top:1px solid var(--border);display:flex;ali
   body::after,body::before{display:none;}
 }
 @media(max-width:380px){
-  .h-logo{font-size:10px;letter-spacing:1px;}
+  .h-logo{font-size:12px;letter-spacing:2px;}
   .h-metrics{grid-template-columns:repeat(2,1fr);}
   .charts-grid{grid-template-columns:1fr;}
 }
@@ -250,7 +255,7 @@ footer{background:var(--bg2);border-top:1px solid var(--border);display:flex;ali
     <div class="hm"><span class="hm-label" data-i18n="awards_label">AWARDS</span><span class="hm-val">7+</span></div>
   </div>
   <div class="h-right">
-    <div class="lang-toggle" id="langToggle" onclick="toggleLang()"><span class="active" id="langEN">EN</span> / <span id="langES">ES</span></div>
+    <div class="lang-toggle" id="langToggle" onclick="toggleLang()"><span class="lang-btn active" id="langEN">EN</span><span class="lang-sep"></span><span class="lang-btn" id="langES">ES</span></div>
     <div class="h-clock" id="clock">--:--:--</div>
   </div>
 </header>
@@ -258,46 +263,46 @@ footer{background:var(--bg2);border-top:1px solid var(--border);display:flex;ali
 <!-- MAIN -->
 <div class="main">
 
-  <!-- LEFT: 3 Info Panels -->
-  <div class="left">
-    <div class="conn-panel">
-      <div class="panel-hdr">
-        <span class="panel-hdr-title" data-i18n="connections_title">◈ ACTIVE CONNECTIONS</span>
-        <span class="panel-hdr-tag">NODES ONLINE</span>
-      </div>
-      <div class="conn-list" id="connList"></div>
-    </div>
-    <div class="skills-panel">
-      <div class="panel-hdr">
-        <span class="panel-hdr-title" data-i18n="skills_title">◈ SKILL MATRIX</span>
-        <span class="panel-hdr-tag" data-i18n="skills_tag">PROFICIENCY INDEX</span>
-      </div>
-      <div class="skill-list" id="skillList"></div>
-    </div>
-    <div class="awards-panel">
-      <div class="panel-hdr">
-        <span class="panel-hdr-title" data-i18n="awards_title">◈ HONORS &amp; RECOGNITION</span>
-        <span class="panel-hdr-tag">VALIDATED</span>
-      </div>
-      <div class="awards-list" id="awardsList"></div>
-    </div>
-  </div>
+  <!-- TOP ROW: Left panels + Career + Chat -->
+  <div class="top-row">
 
-  <!-- CENTER: Career Timeline (35%) -->
-  <div class="center">
-    <div class="panel-hdr">
-      <span class="panel-hdr-title" data-i18n="career_title">◈ CAREER LOG // EXPERIENCE TIMELINE</span>
-      <span class="panel-hdr-tag">20+ YRS · LATAM &amp; EUROPE</span>
+    <!-- LEFT: 3 Info Panels -->
+    <div class="left">
+      <div class="conn-panel">
+        <div class="panel-hdr">
+          <span class="panel-hdr-title" data-i18n="connections_title">◈ ACTIVE CONNECTIONS</span>
+          <span class="panel-hdr-tag">NODES ONLINE</span>
+        </div>
+        <div class="conn-list" id="connList"></div>
+      </div>
+      <div class="skills-panel">
+        <div class="panel-hdr">
+          <span class="panel-hdr-title" data-i18n="skills_title">◈ SKILL MATRIX</span>
+          <span class="panel-hdr-tag" data-i18n="skills_tag">PROFICIENCY INDEX</span>
+        </div>
+        <div class="skill-list" id="skillList"></div>
+      </div>
+      <div class="awards-panel">
+        <div class="panel-hdr">
+          <span class="panel-hdr-title" data-i18n="awards_title">◈ HONORS &amp; RECOGNITION</span>
+          <span class="panel-hdr-tag">VALIDATED</span>
+        </div>
+        <div class="awards-list" id="awardsList"></div>
+      </div>
     </div>
-    <div class="career-body">
-      <div class="career-track" id="careerTrack"></div>
+
+    <!-- CENTER: Career Timeline (35%) -->
+    <div class="center">
+      <div class="panel-hdr">
+        <span class="panel-hdr-title" data-i18n="career_title">◈ CAREER LOG // EXPERIENCE TIMELINE</span>
+        <span class="panel-hdr-tag">20+ YRS · LATAM &amp; EUROPE</span>
+      </div>
+      <div class="career-body">
+        <div class="career-track" id="careerTrack"></div>
+      </div>
     </div>
-  </div>
 
-  <!-- RIGHT: Chat + Infra -->
-  <div class="right">
-
-    <!-- CHAT — IA AGENT -->
+    <!-- RIGHT: IA Agent Chat — same height as career -->
     <div class="chat-section">
       <div class="panel-hdr">
         <span class="panel-hdr-title" data-i18n="chat_title">◈ IA AGENT // CONVERSATIONAL INTERFACE</span>
@@ -311,7 +316,8 @@ footer{background:var(--bg2);border-top:1px solid var(--border);display:flex;ali
       <div class="chat-foot">
         <div class="input-wrap">
           <span class="prompt-sym">›</span>
-          <input type="text" id="chatInput" data-placeholder-en="Query Leandro's profile..." data-placeholder-es="Consultá el perfil de Leandro..." placeholder="Query Leandro's profile...">
+          <input type="text" id="chatInput" data-placeholder-en="Query Leandro's profile..." data-placeholder-es="Consultá el perfil de Leandro..." placeholder="">
+          <span class="input-cursor" id="inputCursor">_</span>
         </div>
         <div class="qbtns">
           <button class="qbtn" data-q-en="Who is Leandro?" data-q-es="Quién es Leandro?" onclick="askQ(this.dataset['q'+curLang])">WHO IS HE</button>
@@ -327,55 +333,56 @@ footer{background:var(--bg2);border-top:1px solid var(--border);display:flex;ali
       </div>
     </div>
 
-    <!-- BOTTOM: TOPOLOGY + CHARTS (no CPU/GPU temp) -->
-    <div class="r-bot">
-      <div class="topo-panel">
-        <div class="panel-hdr">
-          <span class="panel-hdr-title">◈ ARCHITECTURE TOPOLOGY</span>
-          <span class="panel-hdr-tag">LIVE</span>
-        </div>
-        <div class="topo-body">
-          <svg class="topo" viewBox="0 0 460 148">
-            <path class="t-edge g" d="M92,40 L138,40"/><path class="t-edge g" d="M208,40 L252,40"/><path class="t-edge g" d="M322,40 L368,40"/>
-            <path class="t-edge b" d="M92,110 L138,110"/><path class="t-edge b" d="M208,110 L252,110"/><path class="t-edge b" d="M322,110 L368,110"/>
-            <line class="t-edge" x1="173" y1="56" x2="173" y2="94" stroke-dasharray="2,3"/>
-            <line class="t-edge" x1="287" y1="56" x2="287" y2="94" stroke-dasharray="2,3"/>
-            <g class="t-node" data-tip="MiniPC Cluster running K8s locally in BA ARGENTINA. On-premise compute.">
-              <rect x="0" y="22" width="92" height="36" rx="2"/><text x="46" y="36" text-anchor="middle">ON-PREM INFRA</text><text x="46" y="48" text-anchor="middle" class="tsub">MiniPC Cluster</text><circle cx="82" cy="27" r="3" fill="#00ff88"/>
-            </g>
-            <g class="t-node" data-tip="Kubernetes orchestration + Tailscale VPN for secure zero-trust mesh networking.">
-              <rect x="138" y="22" width="70" height="36" rx="2"/><text x="173" y="36" text-anchor="middle">K8s + VPN</text><text x="173" y="48" text-anchor="middle" class="tsub">Tailscale Mesh</text>
-            </g>
-            <g class="t-node" data-tip="IA AGENT: Leandro's personal AI agent. Orchestrates all services, RAG, and profile inference.">
-              <rect x="252" y="16" width="70" height="48" rx="2" stroke="#00ff88" stroke-width="1.5"/><text x="287" y="31" text-anchor="middle" class="tgrn">◈ IA AGENT</text><text x="287" y="43" text-anchor="middle">AGENT SVC</text><text x="287" y="55" text-anchor="middle" class="tsub">Orchestrator</text>
-            </g>
-            <g class="t-node" data-tip="Vector DB (ChromaDB) for semantic search across Leandro's full knowledge base.">
-              <rect x="368" y="22" width="70" height="36" rx="2"/><text x="403" y="36" text-anchor="middle">VECTOR DB</text><text x="403" y="48" text-anchor="middle" class="tsub">ChromaDB</text>
-            </g>
-            <g class="t-node" data-tip="IBM Cloud + WatsonX API integration. Enterprise-grade hybrid cloud architecture.">
-              <rect x="0" y="92" width="92" height="36" rx="2"/><text x="46" y="106" text-anchor="middle" class="tbl">IBM CLOUD</text><text x="46" y="118" text-anchor="middle" class="tsub">WatsonX API</text>
-            </g>
-            <g class="t-node" data-tip="Oracle Cloud Infrastructure for scalable enterprise workloads.">
-              <rect x="138" y="92" width="70" height="36" rx="2"/><text x="173" y="106" text-anchor="middle" class="trd">ORACLE OCI</text><text x="173" y="118" text-anchor="middle" class="tsub">Cloud Infra</text>
-            </g>
-            <g class="t-node" data-tip="Local LLM inference — DeepSeek R1 + Qwen 2.5 running fully on-premise.">
-              <rect x="252" y="92" width="70" height="36" rx="2"/><text x="287" y="103" text-anchor="middle">LOCAL LLM</text><text x="287" y="113" text-anchor="middle" class="tgrn">DeepSeek R1</text><text x="287" y="122" text-anchor="middle" class="tsub">+ Qwen 2.5</text>
-            </g>
-            <g class="t-node" data-tip="GitHub: tech portfolio, open source contributions, and innovation projects.">
-              <rect x="368" y="92" width="70" height="36" rx="2"/><text x="403" y="106" text-anchor="middle">GITHUB</text><text x="403" y="118" text-anchor="middle" class="tsub">Repos · OSS</text>
-            </g>
-          </svg>
-        </div>
+  </div>
+
+  <!-- BOTTOM ROW: Topology + Charts — full width -->
+  <div class="bot-row">
+    <div class="topo-panel">
+      <div class="panel-hdr">
+        <span class="panel-hdr-title">◈ ARCHITECTURE TOPOLOGY</span>
+        <span class="panel-hdr-tag">LIVE</span>
       </div>
-      <div class="charts-grid">
-        <div class="chart-cell"><div class="ct-title">RAM UTILIZATION</div><div><span class="ct-val" id="ramVal">--</span><span class="ct-unit"> %</span></div><canvas id="cvRAM" height="22"></canvas></div>
-        <div class="chart-cell"><div class="ct-title">NETWORK</div><div><span class="ct-val" id="netVal">--</span><span class="ct-unit"> MB/s</span></div><canvas id="cvNET" height="22"></canvas></div>
-        <div class="chart-cell"><div class="ct-title">INFERENCE</div><div><span class="ct-val" id="llmVal">--</span><span class="ct-unit"> T/s</span></div><canvas id="cvLLM" height="22"></canvas></div>
-        <div class="chart-cell"><div class="ct-title">TOKENS</div><div><span class="ct-val" id="tokVal">--</span><span class="ct-unit"> K</span></div><canvas id="cvTOK" height="22"></canvas></div>
+      <div class="topo-body">
+        <svg class="topo" viewBox="0 0 520 165">
+          <path class="t-edge g" d="M105,44 L155,44"/><path class="t-edge g" d="M240,44 L290,44"/><path class="t-edge g" d="M375,44 L425,44"/>
+          <path class="t-edge b" d="M105,122 L155,122"/><path class="t-edge b" d="M240,122 L290,122"/><path class="t-edge b" d="M375,122 L425,122"/>
+          <line class="t-edge" x1="197" y1="62" x2="197" y2="104" stroke-dasharray="2,3"/>
+          <line class="t-edge" x1="332" y1="62" x2="332" y2="104" stroke-dasharray="2,3"/>
+          <g class="t-node" data-tip="MiniPC Cluster running K8s locally in BA ARGENTINA. On-premise compute.">
+            <rect x="0" y="24" width="105" height="40" rx="3"/><text x="52" y="40" text-anchor="middle">ON-PREM INFRA</text><text x="52" y="53" text-anchor="middle" class="tsub">MiniPC Cluster</text><circle cx="94" cy="30" r="3.5" fill="#00ff88"/>
+          </g>
+          <g class="t-node" data-tip="Kubernetes orchestration + Tailscale VPN for secure zero-trust mesh networking.">
+            <rect x="155" y="24" width="85" height="40" rx="3"/><text x="197" y="40" text-anchor="middle">K8s + VPN</text><text x="197" y="53" text-anchor="middle" class="tsub">Tailscale Mesh</text>
+          </g>
+          <g class="t-node" data-tip="IA AGENT: Leandro's personal AI agent. Orchestrates all services, RAG, and profile inference.">
+            <rect x="290" y="18" width="85" height="52" rx="3" stroke="#00ff88" stroke-width="1.5"/><text x="332" y="35" text-anchor="middle" class="tgrn">◈ IA AGENT</text><text x="332" y="48" text-anchor="middle">AGENT SVC</text><text x="332" y="60" text-anchor="middle" class="tsub">Orchestrator</text>
+          </g>
+          <g class="t-node" data-tip="Vector DB (ChromaDB) for semantic search across Leandro's full knowledge base.">
+            <rect x="425" y="24" width="85" height="40" rx="3"/><text x="467" y="40" text-anchor="middle">VECTOR DB</text><text x="467" y="53" text-anchor="middle" class="tsub">ChromaDB</text>
+          </g>
+          <g class="t-node" data-tip="IBM Cloud + WatsonX API integration. Enterprise-grade hybrid cloud architecture.">
+            <rect x="0" y="102" width="105" height="40" rx="3"/><text x="52" y="118" text-anchor="middle" class="tbl">IBM CLOUD</text><text x="52" y="131" text-anchor="middle" class="tsub">WatsonX API</text>
+          </g>
+          <g class="t-node" data-tip="Oracle Cloud Infrastructure for scalable enterprise workloads.">
+            <rect x="155" y="102" width="85" height="40" rx="3"/><text x="197" y="118" text-anchor="middle" class="trd">ORACLE OCI</text><text x="197" y="131" text-anchor="middle" class="tsub">Cloud Infra</text>
+          </g>
+          <g class="t-node" data-tip="Local LLM inference — DeepSeek R1 + Qwen 2.5 running fully on-premise.">
+            <rect x="290" y="102" width="85" height="40" rx="3"/><text x="332" y="115" text-anchor="middle">LOCAL LLM</text><text x="332" y="127" text-anchor="middle" class="tgrn">DeepSeek R1</text><text x="332" y="138" text-anchor="middle" class="tsub">+ Qwen 2.5</text>
+          </g>
+          <g class="t-node" data-tip="GitHub: tech portfolio, open source contributions, and innovation projects.">
+            <rect x="425" y="102" width="85" height="40" rx="3"/><text x="467" y="118" text-anchor="middle">GITHUB</text><text x="467" y="131" text-anchor="middle" class="tsub">Repos · OSS</text>
+          </g>
+        </svg>
       </div>
     </div>
-
+    <div class="charts-grid">
+      <div class="chart-cell"><div class="ct-title">RAM UTILIZATION</div><div><span class="ct-val" id="ramVal">--</span><span class="ct-unit"> %</span></div><canvas id="cvRAM" height="30"></canvas></div>
+      <div class="chart-cell"><div class="ct-title">NETWORK</div><div><span class="ct-val" id="netVal">--</span><span class="ct-unit"> MB/s</span></div><canvas id="cvNET" height="30"></canvas></div>
+      <div class="chart-cell"><div class="ct-title">INFERENCE</div><div><span class="ct-val" id="llmVal">--</span><span class="ct-unit"> T/s</span></div><canvas id="cvLLM" height="30"></canvas></div>
+      <div class="chart-cell"><div class="ct-title">TOKENS</div><div><span class="ct-val" id="tokVal">--</span><span class="ct-unit"> K</span></div><canvas id="cvTOK" height="30"></canvas></div>
+    </div>
   </div>
+
 </div>
 
 <!-- FOOTER -->
@@ -410,27 +417,26 @@ const i18n = {
     awards_title:'◈ HONORS & RECOGNITION', career_title:'◈ CAREER LOG // EXPERIENCE TIMELINE',
     chat_title:'◈ IA AGENT // CONVERSATIONAL INTERFACE', exp_label:'EXPERIENCE', cert_label:'CERTIFICATIONS', awards_label:'AWARDS',
     welcome:'[ AGENT ] Welcome. I\'m Leandro\'s <b>IA Agent</b>. His 20+ year career spans AI, Tech transformation, Startups and entrepreneurship across LATAM, Europe & Japan (JIN). Type any question or use the shortcuts below.',
-    sys1:'IA AGENT INITIALIZING...', sys2:'PROFILE DATABASE CONNECTED · NODE ONLINE', sys3:'VERCEL FUNCTION ACTIVE · API KEY SECURED · ALL SYSTEMS GO',
+    sys_boot:'IA AGENT INITIALIZING... · PROFILE DATABASE CONNECTED · NODE ONLINE · VERCEL FUNCTION ACTIVE · API KEY SECURED · ALL SYSTEMS GO',
   },
   es: {
     connections_title:'◈ CONEXIONES ACTIVAS', skills_title:'◈ MATRIZ DE HABILIDADES', skills_tag:'ÍNDICE DE COMPETENCIA',
     awards_title:'◈ PREMIOS Y RECONOCIMIENTOS', career_title:'◈ TRAYECTORIA PROFESIONAL',
     chat_title:'◈ AGENTE IA // INTERFAZ CONVERSACIONAL', exp_label:'EXPERIENCIA', cert_label:'CERTIFICACIONES', awards_label:'PREMIOS',
     welcome:'[ AGENTE ] Bienvenido. Soy el <b>Agente IA</b> de Leandro. Su carrera de 20+ años abarca IA, Transformación tecnológica, Startups y emprendimientos en LATAM, Europa y Japón (JIN). Escribí tu consulta o usá los atajos.',
-    sys1:'AGENTE IA INICIALIZANDO...', sys2:'BASE DE DATOS CONECTADA · NODO ONLINE', sys3:'FUNCIÓN VERCEL ACTIVA · API KEY SEGURA · SISTEMAS OK',
+    sys_boot:'AGENTE IA INICIALIZANDO... · BASE DE DATOS CONECTADA · NODO ONLINE · FUNCIÓN VERCEL ACTIVA · API KEY SEGURA · SISTEMAS OK',
   }
 };
 
 function toggleLang() {
   curLang = curLang === 'En' ? 'Es' : 'En';
   const lang = curLang.toLowerCase();
-  document.getElementById('langEN').className = lang === 'en' ? 'active' : '';
-  document.getElementById('langES').className = lang === 'es' ? 'active' : '';
+  document.getElementById('langEN').className = 'lang-btn' + (lang === 'en' ? ' active' : '');
+  document.getElementById('langES').className = 'lang-btn' + (lang === 'es' ? ' active' : '');
   document.querySelectorAll('[data-i18n]').forEach(el => {
     const key = el.dataset.i18n;
     if (i18n[lang][key]) el.innerHTML = i18n[lang][key];
   });
-  document.getElementById('chatInput').placeholder = lang === 'en' ? 'Query Leandro\'s profile...' : 'Consultá el perfil de Leandro...';
   // Update career cards
   document.querySelectorAll('.tl-card-role[data-i18n]').forEach(el => {
     const key = el.dataset.i18n;
@@ -467,15 +473,16 @@ const careerI18n = {
 };
 
 // CAREER TIMELINE — horizontal, newest to oldest, clickable
+// Colors: IBM=blue, SURTANK=orange, PARKOOL=cyan, NEO VISION=green, ORACLE=red, VODAFONE=red
 const careerData = [
   {date:'2021 → NOW',cur:true,company:'IBM',color:'b',roleKey:'ibm_role',descKey:'ibm_desc'},
-  {date:'2015 → NOW',cur:true,company:'SURTANK',color:'',roleKey:'surtank_role',descKey:'surtank_desc'},
+  {date:'2015 → NOW',cur:true,company:'SURTANK',color:'o',roleKey:'surtank_role',descKey:'surtank_desc'},
   {date:'2022 → NOW',cur:true,company:'UTN + BARCELÓ',color:'p',roleKey:'utn_role',descKey:'utn_desc'},
   {date:'2019 → 2021',cur:false,company:'ORACLE',color:'r',roleKey:'oracle_role',descKey:'oracle_desc'},
   {date:'2018 → 2019',cur:false,company:'MUNI. 3 DE FEB',color:'',roleKey:'muni_role',descKey:'muni_desc'},
-  {date:'2015 → 2018',cur:false,company:'PARKOOL',color:'y',roleKey:'parkool_role',descKey:'parkool_desc'},
+  {date:'2015 → 2018',cur:false,company:'PARKOOL',color:'c',roleKey:'parkool_role',descKey:'parkool_desc'},
   {date:'2004 → 2006',cur:false,company:'VODAFONE',color:'r',roleKey:'voda_role',descKey:'voda_desc'},
-  {date:'2000 → 2006',cur:false,company:'NEO VISION',color:'y',roleKey:'neo_role',descKey:'neo_desc'},
+  {date:'2000 → 2006',cur:false,company:'NEO VISION',color:'g',roleKey:'neo_role',descKey:'neo_desc'},
 ];
 
 const track = document.getElementById('careerTrack');
@@ -500,6 +507,13 @@ careerData.forEach((c,i) => {
   track.appendChild(card);
 });
 
+// Blinking cursor in input
+const chatInput = document.getElementById('chatInput');
+const inputCursor = document.getElementById('inputCursor');
+chatInput.addEventListener('input', () => { inputCursor.style.display = chatInput.value ? 'none' : ''; });
+chatInput.addEventListener('focus', () => { inputCursor.style.display = chatInput.value ? 'none' : ''; });
+chatInput.addEventListener('blur', () => { inputCursor.style.display = chatInput.value ? 'none' : ''; });
+
 // CLOCK
 function tick(){const n=new Date();document.getElementById('clock').textContent=n.getHours().toString().padStart(2,'0')+':'+n.getMinutes().toString().padStart(2,'0')+':'+n.getSeconds().toString().padStart(2,'0');}
 setInterval(tick,1000);tick();
@@ -507,13 +521,13 @@ setInterval(tick,1000);tick();
 // LATENCY
 setInterval(()=>{document.getElementById('lat').textContent=(6+Math.floor(Math.random()*9))+'ms';},2600);
 
-// CHARTS — no CPU or GPU
+// CHARTS
 const series={ram:{id:'ramVal',cv:'cvRAM',data:[],lo:60,hi:75,color:'#44aaff',prev:68},net:{id:'netVal',cv:'cvNET',data:[],lo:3,hi:7,color:'#aa88ff',dec:1,prev:5},llm:{id:'llmVal',cv:'cvLLM',data:[],lo:40,hi:58,color:'#ffcc44',prev:48},tok:{id:'tokVal',cv:'cvTOK',data:[],lo:30,hi:60,color:'#00ffcc',dec:1,prev:45}};
 function rnd(a,b){return a+Math.random()*(b-a);}
 function smooth(s){const target=rnd(s.lo,s.hi);s.prev=s.prev*0.85+target*0.15;return s.prev;}
 function sparkline(id,data,color){
   const c=document.getElementById(id);if(!c)return;
-  const w=c.parentElement.clientWidth,h=28;c.width=w;c.height=h;
+  const w=c.parentElement.clientWidth,h=36;c.width=w;c.height=h;
   const ctx=c.getContext('2d');ctx.clearRect(0,0,w,h);
   if(data.length<2)return;
   const mn=Math.min(...data),mx=Math.max(...data),rng=mx-mn||1;
@@ -548,11 +562,11 @@ const conns=[
 const cl=document.getElementById('connList');
 conns.forEach((c,i)=>{const d=document.createElement('div');d.className='conn-item';d.innerHTML=`<div class="conn-left"><div class="dot" style="width:5px;height:5px;animation-delay:${(i*.3).toFixed(1)}s"></div><div><div class="conn-name">${c.n}</div><div class="conn-meta">${c.m}</div></div></div><div class="conn-right"><span class="conn-rate">${c.r}</span><span class="conn-count">${c.c}</span></div>`;cl.appendChild(d);});
 
-// SKILLS
+// SKILLS — opacity 0.55 on bars
 const skills=[
-  {n:'AI & GEN AI (WatsonX / DeepSeek)',p:92,c:''},
+  {n:'AI & GEN AI (WatsonX / DeepSeek)',p:92,c:'g'},
   {n:'Cloud Architecture (IBM/Oracle/AWS)',p:88,c:'b'},
-  {n:'Digital Transformation Strategy',p:95,c:''},
+  {n:'Digital Transformation Strategy',p:95,c:'g'},
   {n:'Blockchain & DeFi',p:72,c:'p'},
   {n:'GovTech & Public Policy Innovation',p:90,c:'p'},
   {n:'Startup Ecosystems & Mentorship',p:87,c:'y'},
@@ -630,16 +644,15 @@ async function askQ(q) {
   }
 }
 
+// Boot sequence — single line
 (async () => {
   const lang = curLang.toLowerCase();
-  await addMsg('sys', i18n[lang].sys1, 300);
-  await addMsg('sys', i18n[lang].sys2, 700);
-  await addMsg('sys', i18n[lang].sys3, 500);
+  await addMsg('sys', i18n[lang].sys_boot, 400);
   await addMsg('agent', i18n[lang].welcome, 700);
 })();
 
 const inp = document.getElementById('chatInput');
-inp.addEventListener('keydown', e => { if (e.key === 'Enter' && inp.value.trim()) { askQ(inp.value.trim()); inp.value = ''; } });
+inp.addEventListener('keydown', e => { if (e.key === 'Enter' && inp.value.trim()) { askQ(inp.value.trim()); inp.value = ''; inputCursor.style.display = ''; } });
 </script>
 </body>
 </html>
