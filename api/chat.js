@@ -68,17 +68,27 @@ CONTACT: lmocchegiani@gmail.com | linkedin.com/in/leandromocchegiani | Caseros, 
 Keep responses concise (3–6 sentences). Be specific — use real names, dates, numbers. Never invent information.`;
 
 export default async function handler(req, res) {
-  if (req.method !== 'POST') {
-    return res.status(405).json({ error: 'Method not allowed' });
-  }
-
   const origin = req.headers.origin;
-  const allowed = ['https://www.leandromocchegiani.com', 'https://leandromocchegiani.com'];
+  const allowed = [
+    'https://www.leandromocchegiani.com',
+    'https://leandromocchegiani.com',
+    'https://mocchegiani.com.ar',
+    'https://www.mocchegiani.com.ar',
+    'https://leandro-hub.vercel.app',
+  ];
   if (allowed.includes(origin)) {
     res.setHeader('Access-Control-Allow-Origin', origin);
   }
-  res.setHeader('Access-Control-Allow-Methods', 'POST');
+  res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+
+  if (req.method === 'OPTIONS') {
+    return res.status(204).end();
+  }
+
+  if (req.method !== 'POST') {
+    return res.status(405).json({ error: 'Method not allowed' });
+  }
 
   const { messages } = req.body;
   if (!messages || !Array.isArray(messages)) {
