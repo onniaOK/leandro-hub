@@ -30,16 +30,17 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
 header{background:var(--bg2);border-bottom:1px solid var(--border);display:flex;align-items:center;padding:0 14px;gap:14px;position:relative;overflow:hidden;}
 header::after{content:'';position:absolute;bottom:0;left:-100%;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--green),transparent);animation:hline 5s linear infinite;}
 @keyframes hline{0%{left:-100%}100%{left:100%}}
-.h-logo{font-size:15px;font-weight:800;letter-spacing:4px;color:var(--white);border-right:1px solid var(--border2);padding-right:14px;white-space:nowrap;}
+.h-logo{font-size:13px;font-weight:800;letter-spacing:3px;color:var(--white);border-right:1px solid var(--border2);padding-right:14px;white-space:nowrap;line-height:1.15;}
 .h-logo span{color:var(--green);}
+.h-logo .fname{display:block;font-size:10px;letter-spacing:2px;font-weight:700;}
 .h-sub{display:flex;flex-direction:column;gap:1px;border-right:1px solid var(--border2);padding-right:14px;}
 .h-role{font-size:8.5px;color:var(--green);letter-spacing:2px;font-weight:700;}
 .h-spec{font-size:8px;color:var(--gray);letter-spacing:1px;}
 .h-badge{display:flex;align-items:center;gap:6px;padding:3px 9px;border:1px solid var(--gdim);background:var(--gglow);font-size:8.5px;letter-spacing:1.5px;color:var(--green);white-space:nowrap;}
 .h-badge.blue{border-color:var(--bdim);color:var(--blue);background:rgba(68,170,255,0.04);}
-.lang-toggle{display:flex;align-items:center;gap:6px;padding:3px 9px;border:1px solid var(--bdim);background:rgba(68,170,255,0.04);font-size:8.5px;letter-spacing:1.5px;color:var(--blue);white-space:nowrap;cursor:pointer;transition:all .2s;user-select:none;}
+.lang-toggle{display:flex;align-items:center;gap:8px;padding:5px 14px;border:1px solid var(--bdim);background:rgba(68,170,255,0.04);font-size:11px;letter-spacing:2px;color:var(--blue);white-space:nowrap;cursor:pointer;transition:all .2s;user-select:none;font-weight:700;}
 .lang-toggle:hover{border-color:var(--blue);background:rgba(68,170,255,0.12);}
-.lang-toggle .active{color:var(--white);font-weight:700;}
+.lang-toggle .active{color:var(--white);font-weight:800;}
 .dot{width:6px;height:6px;border-radius:50%;flex-shrink:0;background:var(--green);box-shadow:0 0 8px var(--green);animation:dpulse 1.6s ease-in-out infinite;}
 .dot.blue{background:var(--blue);box-shadow:0 0 8px var(--blue);}
 .dot.yellow{background:var(--yellow);box-shadow:0 0 8px var(--yellow);}
@@ -50,21 +51,22 @@ header::after{content:'';position:absolute;bottom:0;left:-100%;right:0;height:1p
 .hm-val{color:var(--green);font-weight:700;font-size:10px;}
 .hm-val.b{color:var(--blue);}
 .hm-val.w{color:var(--white);}
-.h-clock{font-size:14px;font-weight:800;color:var(--green);letter-spacing:3px;border-left:1px solid var(--border2);padding-left:14px;min-width:100px;font-variant-numeric:tabular-nums;}
+.h-right{display:flex;align-items:center;gap:12px;border-left:1px solid var(--border2);padding-left:14px;}
+.h-clock{font-size:14px;font-weight:800;color:var(--green);letter-spacing:3px;min-width:100px;font-variant-numeric:tabular-nums;}
 
-/* MAIN — NEW LAYOUT: left=3panels, right=career+chat+topo */
-.main{display:grid;grid-template-columns:320px 1fr;overflow:hidden;}
+/* MAIN — 3 cols: left panels | career 35% | chat+infra */
+.main{display:grid;grid-template-columns:auto 35% 1fr;overflow:hidden;}
 
-/* LEFT: 3 stacked panels */
-.left{border-right:1px solid var(--border);display:flex;flex-direction:column;background:var(--bg2);overflow:hidden;}
-.panel-hdr{padding:7px 10px;border-bottom:1px solid var(--border);background:var(--bg3);display:flex;align-items:center;justify-content:space-between;}
+/* LEFT: 3 stacked panels — shrink to content */
+.left{border-right:1px solid var(--border);display:flex;flex-direction:column;background:var(--bg2);overflow:hidden;min-width:0;max-width:280px;}
+.panel-hdr{padding:7px 10px;border-bottom:1px solid var(--border);background:var(--bg3);display:flex;align-items:center;justify-content:space-between;white-space:nowrap;}
 .panel-hdr-title{font-size:8.5px;letter-spacing:2px;color:var(--green);font-weight:700;}
 .panel-hdr-tag{font-size:8px;color:var(--gray);letter-spacing:1px;}
 
 /* Connection, Skills, Awards panels in left column */
 .conn-panel{border-bottom:1px solid var(--border);display:flex;flex-direction:column;overflow:hidden;flex:1;}
 .conn-list{flex:1;overflow-y:auto;padding:5px 8px;}
-.conn-item{display:flex;align-items:center;justify-content:space-between;padding:4px 0;border-bottom:1px solid var(--border);font-size:9px;}
+.conn-item{display:flex;align-items:center;justify-content:space-between;padding:4px 0;border-bottom:1px solid var(--border);font-size:9px;white-space:nowrap;}
 .conn-item:last-child{border:none;}
 .conn-left{display:flex;align-items:center;gap:6px;}
 .conn-name{color:var(--white);letter-spacing:.5px;}
@@ -76,7 +78,7 @@ header::after{content:'';position:absolute;bottom:0;left:-100%;right:0;height:1p
 .skills-panel{border-bottom:1px solid var(--border);display:flex;flex-direction:column;overflow:hidden;flex:1;}
 .skill-list{flex:1;padding:6px 8px;overflow-y:auto;display:flex;flex-direction:column;gap:5px;}
 .skill-item{display:flex;flex-direction:column;gap:2px;}
-.skill-name{font-size:8px;color:var(--white);letter-spacing:.5px;display:flex;justify-content:space-between;}
+.skill-name{font-size:8px;color:var(--white);letter-spacing:.5px;display:flex;justify-content:space-between;white-space:nowrap;}
 .skill-name span{color:var(--green);font-size:8px;}
 .skill-bar-bg{height:3px;background:var(--border2);position:relative;overflow:hidden;}
 .skill-bar{height:100%;background:var(--green);transition:width 1.5s cubic-bezier(.23,1,.32,1);width:0;}
@@ -86,40 +88,45 @@ header::after{content:'';position:absolute;bottom:0;left:-100%;right:0;height:1p
 
 .awards-panel{display:flex;flex-direction:column;overflow:hidden;flex:1;}
 .awards-list{flex:1;padding:5px 8px;overflow-y:auto;display:flex;flex-direction:column;gap:2px;}
-.award-item{display:flex;align-items:flex-start;gap:6px;padding:3px 0;border-bottom:1px solid var(--border);font-size:8.5px;line-height:1.4;}
+.award-item{display:flex;align-items:flex-start;gap:6px;padding:3px 0;border-bottom:1px solid var(--border);font-size:8.5px;line-height:1.4;white-space:nowrap;}
 .award-item:last-child{border:none;}
 .award-sym{color:var(--yellow);font-size:9px;flex-shrink:0;margin-top:1px;}
 .award-text{color:var(--white);}
 .award-year{font-size:7.5px;color:var(--gray);}
 
-/* RIGHT: career(top) + chat(mid) + topo/charts(bot) */
-.right{display:grid;grid-template-rows:1fr auto 210px;overflow:hidden;}
+/* CENTER: Career timeline — 35% horizontal scrolling timeline */
+.center{border-right:1px solid var(--border);display:flex;flex-direction:column;overflow:hidden;background:var(--bg2);}
+.career-body{flex:1;overflow-x:auto;overflow-y:hidden;padding:14px 10px;display:flex;gap:0;align-items:stretch;}
+.career-track{display:flex;align-items:flex-start;gap:0;position:relative;min-height:100%;}
+/* the connecting line */
+.career-track::before{content:'';position:absolute;top:18px;left:10px;right:10px;height:2px;background:var(--border2);}
+.tl-card{position:relative;display:flex;flex-direction:column;align-items:center;min-width:130px;max-width:150px;cursor:pointer;flex-shrink:0;padding-top:0;}
+.tl-card-dot{width:12px;height:12px;border-radius:50%;border:2px solid var(--green);background:var(--bg);box-shadow:0 0 8px var(--green);z-index:2;flex-shrink:0;transition:all .2s;}
+.tl-card-dot.b{border-color:var(--blue);box-shadow:0 0 8px var(--blue);}
+.tl-card-dot.r{border-color:var(--red);box-shadow:0 0 8px var(--red);}
+.tl-card-dot.y{border-color:var(--yellow);box-shadow:0 0 8px var(--yellow);}
+.tl-card-dot.p{border-color:var(--purple);box-shadow:0 0 8px var(--purple);}
+.tl-card-connector{width:2px;height:10px;background:var(--border2);flex-shrink:0;}
+.tl-card-box{border:1px solid var(--border2);background:var(--bg3);padding:8px 10px;text-align:center;transition:all .2s;width:100%;}
+.tl-card:hover .tl-card-box{border-color:var(--green);box-shadow:0 0 12px var(--gglow);}
+.tl-card:hover .tl-card-dot{transform:scale(1.3);}
+.tl-card-date{font-size:7px;color:var(--gray);letter-spacing:1px;margin-bottom:3px;}
+.tl-card-date .cur{color:var(--green);}
+.tl-card-company{font-size:10px;font-weight:700;color:var(--white);letter-spacing:1px;}
+.tl-card-company.b{color:var(--blue);}
+.tl-card-company.r{color:var(--red);}
+.tl-card-company.y{color:var(--yellow);}
+.tl-card-company.p{color:var(--purple);}
+.tl-card-role{font-size:7.5px;color:var(--gray);letter-spacing:.3px;margin-top:2px;white-space:normal;line-height:1.3;}
+.tl-card-desc{font-size:7.5px;color:var(--gray);line-height:1.4;margin-top:6px;text-align:left;white-space:normal;display:none;border-top:1px solid var(--border);padding-top:6px;}
+.tl-card.open .tl-card-desc{display:block;}
+.tl-card.open .tl-card-box{border-color:var(--green);background:var(--bg4);}
 
-/* CAREER LOG — now prominent */
-.r-career{display:flex;flex-direction:column;overflow:hidden;border-bottom:1px solid var(--border);}
-.r-career-body{flex:1;overflow-y:auto;padding:10px 14px;display:flex;flex-direction:column;gap:0;scrollbar-width:thin;scrollbar-color:var(--gray2) transparent;}
-.r-career-body::-webkit-scrollbar{width:3px;}
-.r-career-body::-webkit-scrollbar-thumb{background:var(--gray2);}
-.tl-item{display:grid;grid-template-columns:76px 1px 1fr;gap:0 10px;padding-bottom:12px;}
-.tl-date{font-size:8px;color:var(--gray);text-align:right;padding-top:2px;line-height:1.4;}
-.tl-date .cur{color:var(--green);display:block;}
-.tl-line{display:flex;flex-direction:column;align-items:center;}
-.tl-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;background:var(--bg);border:1.5px solid var(--green);box-shadow:0 0 6px var(--green);margin-top:2px;}
-.tl-dot.b{border-color:var(--blue);box-shadow:0 0 6px var(--blue);}
-.tl-dot.r{border-color:var(--red);box-shadow:0 0 6px var(--red);}
-.tl-dot.y{border-color:var(--yellow);box-shadow:0 0 6px var(--yellow);}
-.tl-dot.p{border-color:var(--purple);box-shadow:0 0 6px var(--purple);}
-.tl-vline{flex:1;width:1px;background:var(--border2);min-height:18px;}
-.tl-company{font-size:11px;font-weight:700;color:var(--white);letter-spacing:1px;}
-.tl-company.b{color:var(--blue);}
-.tl-company.r{color:var(--red);}
-.tl-company.y{color:var(--yellow);}
-.tl-company.p{color:var(--purple);}
-.tl-role{font-size:9px;color:var(--gray);letter-spacing:.5px;margin-bottom:2px;}
-.tl-desc{font-size:8.5px;color:var(--gray);line-height:1.5;}
+/* RIGHT: chat + infra (smaller) */
+.right{display:grid;grid-template-rows:1fr 150px;overflow:hidden;}
 
-/* CHAT — now in middle of right column */
-.chat-section{display:flex;flex-direction:column;border-bottom:1px solid var(--border);min-height:220px;}
+/* CHAT */
+.chat-section{display:flex;flex-direction:column;border-bottom:1px solid var(--border);overflow:hidden;}
 .chat-log{flex:1;overflow-y:auto;padding:10px;display:flex;flex-direction:column;gap:8px;scrollbar-width:thin;scrollbar-color:var(--gray2) transparent;}
 .chat-log::-webkit-scrollbar{width:3px;}
 .chat-log::-webkit-scrollbar-thumb{background:var(--gray2);}
@@ -128,11 +135,11 @@ header::after{content:'';position:absolute;bottom:0;left:-100%;right:0;height:1p
 .cmsg-from{font-size:8px;letter-spacing:1.5px;color:var(--gray);}
 .cmsg-from.agent{color:var(--green);}
 .cmsg-from.user{color:var(--blue);}
-.cmsg-from.sys{color:var(--yellow);}
+.cmsg-from.sys{color:var(--green);}
 .cmsg-body{font-size:11px;line-height:1.65;padding:5px 8px;background:rgba(255,255,255,0.018);border-left:2px solid var(--gray2);}
 .cmsg-body.agent{border-color:rgba(0,255,136,0.3);}
 .cmsg-body.user{border-color:rgba(68,170,255,0.3);color:#9ac8ff;}
-.cmsg-body.sys{border-color:rgba(255,204,68,0.3);color:var(--yellow);}
+.cmsg-body.sys{border-color:rgba(0,255,136,0.2);color:var(--green);font-size:9px;}
 .typing{display:flex;align-items:center;gap:8px;padding:5px 10px;font-size:8px;color:var(--green);opacity:0;transition:opacity .2s;min-height:22px;}
 .typing.show{opacity:1;}
 .tdots span{display:inline-block;width:4px;height:4px;background:var(--green);border-radius:50%;margin:0 1.5px;animation:tbounce 1.2s ease-in-out infinite;}
@@ -149,10 +156,10 @@ header::after{content:'';position:absolute;bottom:0;left:-100%;right:0;height:1p
 .qbtn{font-size:8px;letter-spacing:.5px;padding:4px 8px;border:1px solid var(--gray2);background:none;color:var(--gray);font-family:var(--font);cursor:pointer;transition:all .15s;}
 .qbtn:hover{border-color:var(--green);color:var(--green);background:var(--gglow);}
 
-/* BOTTOM: TOPOLOGY + CHARTS */
+/* BOTTOM: TOPOLOGY + CHARTS (compact) */
 .r-bot{display:grid;grid-template-columns:1fr 1fr;overflow:hidden;}
 .topo-panel{border-right:1px solid var(--border);display:flex;flex-direction:column;overflow:hidden;}
-.topo-body{flex:1;padding:8px 12px;display:flex;align-items:center;justify-content:center;}
+.topo-body{flex:1;padding:4px 8px;display:flex;align-items:center;justify-content:center;}
 svg.topo{width:100%;height:100%;overflow:visible;}
 .t-node rect{fill:var(--bg3);stroke:var(--border2);stroke-width:1;transition:stroke .2s;}
 .t-node:hover rect{stroke:var(--green);}
@@ -166,11 +173,11 @@ svg.topo{width:100%;height:100%;overflow:visible;}
 .t-edge.b{stroke:var(--blue);stroke-dasharray:4 3;animation:tdash 2.4s linear infinite;}
 @keyframes tdash{from{stroke-dashoffset:0}to{stroke-dashoffset:-28}}
 
-.charts-grid{display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr 1fr;gap:1px;background:var(--border);}
-.chart-cell{background:var(--bg2);padding:6px 8px;display:flex;flex-direction:column;gap:2px;overflow:hidden;}
-.ct-title{font-size:8px;letter-spacing:1.5px;color:var(--gray);font-weight:700;}
-.ct-val{font-size:18px;font-weight:800;color:var(--green);line-height:1;}
-.ct-unit{font-size:8px;color:var(--gray);}
+.charts-grid{display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;gap:1px;background:var(--border);}
+.chart-cell{background:var(--bg2);padding:4px 6px;display:flex;flex-direction:column;gap:1px;overflow:hidden;}
+.ct-title{font-size:7px;letter-spacing:1.5px;color:var(--gray);font-weight:700;}
+.ct-val{font-size:14px;font-weight:800;color:var(--green);line-height:1;}
+.ct-unit{font-size:7px;color:var(--gray);}
 canvas{display:block;width:100%!important;}
 
 /* FOOTER */
@@ -193,20 +200,21 @@ footer{background:var(--bg2);border-top:1px solid var(--border);display:flex;ali
   html,body{overflow:auto;font-size:12px;}
   .shell{display:flex;flex-direction:column;height:auto;min-height:100vh;}
   header{flex-wrap:wrap;padding:8px 10px;gap:6px;height:auto;min-height:auto;}
-  .h-logo{font-size:14px;letter-spacing:3px;border-right:none;padding-right:0;}
+  .h-logo{font-size:12px;letter-spacing:2px;border-right:none;padding-right:0;}
   .h-sub{display:none;}
-  .h-badge,.lang-toggle{font-size:7px;padding:2px 6px;}
+  .h-badge,.lang-toggle{font-size:9px;padding:4px 10px;}
   .h-metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;width:100%;margin-left:0;margin-top:4px;}
-  .h-clock{font-size:12px;min-width:auto;border-left:none;padding-left:0;margin-left:auto;}
+  .h-right{border-left:none;padding-left:0;}
+  .h-clock{font-size:12px;min-width:auto;}
   .main{display:flex;flex-direction:column;overflow:visible;}
-  .left{border-right:none;border-bottom:1px solid var(--border);flex-direction:column;}
+  .left{border-right:none;border-bottom:1px solid var(--border);flex-direction:column;max-width:none;}
+  .center{border-right:none;border-bottom:1px solid var(--border);}
+  .career-body{overflow-x:auto;padding:10px;}
   .right{display:flex;flex-direction:column;overflow:visible;}
-  .r-career{max-height:none;overflow:visible;}
-  .r-career-body{max-height:none;overflow:visible;padding:10px;}
   .chat-section{min-height:40vh;}
   .chat-log{min-height:200px;max-height:40vh;}
-  .r-bot{display:flex;flex-direction:column;}
-  .topo-panel{border-right:none;border-bottom:1px solid var(--border);min-height:160px;}
+  .r-bot{display:flex;flex-direction:column;height:auto;}
+  .topo-panel{border-right:none;border-bottom:1px solid var(--border);min-height:140px;}
   .charts-grid{grid-template-columns:1fr 1fr;grid-template-rows:auto;}
   footer{flex-wrap:wrap;padding:8px 10px;gap:6px;height:auto;min-height:auto;}
   .f-stack{flex-wrap:wrap;gap:4px;width:100%;}
@@ -215,7 +223,7 @@ footer{background:var(--bg2);border-top:1px solid var(--border);display:flex;ali
   body::after,body::before{display:none;}
 }
 @media(max-width:380px){
-  .h-logo{font-size:12px;letter-spacing:2px;}
+  .h-logo{font-size:10px;letter-spacing:1px;}
   .h-metrics{grid-template-columns:repeat(2,1fr);}
   .charts-grid{grid-template-columns:1fr;}
 }
@@ -227,13 +235,12 @@ footer{background:var(--bg2);border-top:1px solid var(--border);display:flex;ali
 
 <!-- HEADER -->
 <header>
-  <div class="h-logo">L.<span>MOCCHEGIANI</span></div>
+  <div class="h-logo"><span class="fname">LEANDRO E.</span><span>MOCCHEGIANI</span></div>
   <div class="h-sub">
     <div class="h-role">TECH INNOVATOR · AI STRATEGY · EMERGING TECH</div>
     <div class="h-spec">TECH TRANSFORMATION CONSULTANT · LATAM &amp; GLOBAL · 20+ YRS EXP</div>
   </div>
   <div class="h-badge"><div class="dot"></div>SYSTEM: OPERATIONAL</div>
-  <div class="lang-toggle" id="langToggle" onclick="toggleLang()"><div class="dot blue"></div><span class="active" id="langEN">EN</span> / <span id="langES">ES</span></div>
   <div class="h-metrics">
     <div class="hm"><span class="hm-label">NODE</span><span class="hm-val w">BA ARG</span></div>
     <div class="hm"><span class="hm-label">LATENCY</span><span class="hm-val" id="lat">9ms</span></div>
@@ -242,7 +249,10 @@ footer{background:var(--bg2);border-top:1px solid var(--border);display:flex;ali
     <div class="hm"><span class="hm-label" data-i18n="cert_label">CERTIFICATIONS</span><span class="hm-val">18</span></div>
     <div class="hm"><span class="hm-label" data-i18n="awards_label">AWARDS</span><span class="hm-val">7+</span></div>
   </div>
-  <div class="h-clock" id="clock">--:--:--</div>
+  <div class="h-right">
+    <div class="lang-toggle" id="langToggle" onclick="toggleLang()"><span class="active" id="langEN">EN</span> / <span id="langES">ES</span></div>
+    <div class="h-clock" id="clock">--:--:--</div>
+  </div>
 </header>
 
 <!-- MAIN -->
@@ -273,58 +283,19 @@ footer{background:var(--bg2);border-top:1px solid var(--border);display:flex;ali
     </div>
   </div>
 
-  <!-- RIGHT: Career + Chat + Infra -->
-  <div class="right">
-
-    <!-- CAREER LOG — prominent -->
-    <div class="r-career">
-      <div class="panel-hdr">
-        <span class="panel-hdr-title" data-i18n="career_title">◈ CAREER LOG // EXPERIENCE TIMELINE</span>
-        <span class="panel-hdr-tag">20+ YRS · LATAM &amp; EUROPE</span>
-      </div>
-      <div class="r-career-body">
-        <div class="tl-item">
-          <div class="tl-date"><span class="cur">2021</span><span>→ PRESENT</span></div>
-          <div class="tl-line"><div class="tl-dot b"></div><div class="tl-vline"></div></div>
-          <div><div class="tl-company b">IBM</div><div class="tl-role" data-i18n="ibm_role">Business Architect · ICBC Banking</div><div class="tl-desc" data-i18n="ibm_desc">Architecture strategy &amp; tech adoption · Gen AI / WatsonX solutions · Legacy ↔ digital integration · Risk mitigation frameworks</div></div>
-        </div>
-        <div class="tl-item">
-          <div class="tl-date"><span>2015</span><span>→ PRESENT</span></div>
-          <div class="tl-line"><div class="tl-dot"></div><div class="tl-vline"></div></div>
-          <div><div class="tl-company">SURTANK</div><div class="tl-role" data-i18n="surtank_role">Digital Innovation Consultant &amp; Project Evaluator</div><div class="tl-desc" data-i18n="surtank_desc">Lead evaluator sci-tech projects (economic impact) · "City Solutions Palette" academic paper · Startup advisory · LATAM innovation ecosystems</div></div>
-        </div>
-        <div class="tl-item">
-          <div class="tl-date"><span>2019</span><span>→ 2021</span></div>
-          <div class="tl-line"><div class="tl-dot r"></div><div class="tl-vline"></div></div>
-          <div><div class="tl-company r">ORACLE</div><div class="tl-role" data-i18n="oracle_role">Business Architect Public Sector LAD</div><div class="tl-desc" data-i18n="oracle_desc">Digital transformation roadmaps for LatAm govs · GovTech Design Thinking &amp; Bootcamps · Oracle for Startups Ambassador · VC–public sector bridge</div></div>
-        </div>
-        <div class="tl-item">
-          <div class="tl-date"><span>2018</span><span>→ 2019</span></div>
-          <div class="tl-line"><div class="tl-dot"></div><div class="tl-vline"></div></div>
-          <div><div class="tl-company">MUNI. TRES DE FEBRERO</div><div class="tl-role" data-i18n="muni_role">Director of Entrepreneurs</div><div class="tl-desc" data-i18n="muni_desc">Public policies for productive ecosystems · Big Tech + academia + gov collaboration · Regional economic growth facilitation</div></div>
-        </div>
-        <div class="tl-item">
-          <div class="tl-date"><span>2015</span><span>→ 2018</span></div>
-          <div class="tl-line"><div class="tl-dot y"></div><div class="tl-vline"></div></div>
-          <div><div class="tl-company y">PARKOOL</div><div class="tl-role">CEO &amp; Founder</div><div class="tl-desc" data-i18n="parkool_desc">First Smart Parking startup in LATAM · Urban services digitalization · Sustainable mobility · 3,000+ users in Year 1</div></div>
-        </div>
-        <div class="tl-item">
-          <div class="tl-date"><span>2004</span><span>→ 2006</span></div>
-          <div class="tl-line"><div class="tl-dot r"></div><div class="tl-vline"></div></div>
-          <div><div class="tl-company r">VODAFONE · BARCELONA</div><div class="tl-role" data-i18n="voda_role">Sales Manager &amp; Product Tester</div><div class="tl-desc" data-i18n="voda_desc">Launched first concept stores Spain · Evaluated UMTS &amp; Europe's first mobile video conferencing · Created world's first mobile short film contest</div></div>
-        </div>
-        <div class="tl-item">
-          <div class="tl-date"><span>2000</span><span>→ 2006</span></div>
-          <div class="tl-line"><div class="tl-dot y"></div><div class="tl-vline"></div></div>
-          <div><div class="tl-company y">NEO VISION PRODUCCIONES</div><div class="tl-role" data-i18n="neo_role">CTO &amp; Founder · Barcelona, Spain</div><div class="tl-desc" data-i18n="neo_desc">VR scenario creation · 3D design · Audiovisual production · Advertising &amp; institutional content · Short films</div></div>
-        </div>
-        <div class="tl-item">
-          <div class="tl-date"><span>2022</span><span>→ NOW</span></div>
-          <div class="tl-line"><div class="tl-dot p"></div><div class="tl-vline"></div></div>
-          <div><div class="tl-company p">UTN + FUNDACIÓN BARCELÓ</div><div class="tl-role" data-i18n="utn_role">Professor · Open Innovation &amp; AI in HealthTech</div><div class="tl-desc" data-i18n="utn_desc">MIT 100K LATAM Official Jury (2021 &amp; 2022) · Speaker: Expo Smart City Bogotá · GOJCodeFest Jamaica · Evaluator: NASA · UNDP · Itaipú</div></div>
-        </div>
-      </div>
+  <!-- CENTER: Career Timeline (35%) -->
+  <div class="center">
+    <div class="panel-hdr">
+      <span class="panel-hdr-title" data-i18n="career_title">◈ CAREER LOG // EXPERIENCE TIMELINE</span>
+      <span class="panel-hdr-tag">20+ YRS · LATAM &amp; EUROPE</span>
     </div>
+    <div class="career-body">
+      <div class="career-track" id="careerTrack"></div>
+    </div>
+  </div>
+
+  <!-- RIGHT: Chat + Infra -->
+  <div class="right">
 
     <!-- CHAT — IA AGENT -->
     <div class="chat-section">
@@ -356,7 +327,7 @@ footer{background:var(--bg2);border-top:1px solid var(--border);display:flex;ali
       </div>
     </div>
 
-    <!-- BOTTOM: TOPOLOGY + CHARTS -->
+    <!-- BOTTOM: TOPOLOGY + CHARTS (no CPU/GPU temp) -->
     <div class="r-bot">
       <div class="topo-panel">
         <div class="panel-hdr">
@@ -397,12 +368,10 @@ footer{background:var(--bg2);border-top:1px solid var(--border);display:flex;ali
         </div>
       </div>
       <div class="charts-grid">
-        <div class="chart-cell"><div class="ct-title">CPU LOAD</div><div><span class="ct-val" id="cpuVal">--</span><span class="ct-unit"> %</span></div><canvas id="cvCPU" height="28"></canvas></div>
-        <div class="chart-cell"><div class="ct-title">RAM UTILIZATION</div><div><span class="ct-val" id="ramVal">--</span><span class="ct-unit"> %</span></div><canvas id="cvRAM" height="28"></canvas></div>
-        <div class="chart-cell"><div class="ct-title">NETWORK</div><div><span class="ct-val" id="netVal">--</span><span class="ct-unit"> MB/s</span></div><canvas id="cvNET" height="28"></canvas></div>
-        <div class="chart-cell"><div class="ct-title">INFERENCE</div><div><span class="ct-val" id="llmVal">--</span><span class="ct-unit"> T/s</span></div><canvas id="cvLLM" height="28"></canvas></div>
-        <div class="chart-cell"><div class="ct-title">TOKENS</div><div><span class="ct-val" id="tokVal">--</span><span class="ct-unit"> K</span></div><canvas id="cvTOK" height="28"></canvas></div>
-        <div class="chart-cell"><div class="ct-title">GPU TEMP</div><div><span class="ct-val" id="gpuVal">65</span><span class="ct-unit"> °C</span></div><canvas id="cvGPU" height="28"></canvas></div>
+        <div class="chart-cell"><div class="ct-title">RAM UTILIZATION</div><div><span class="ct-val" id="ramVal">--</span><span class="ct-unit"> %</span></div><canvas id="cvRAM" height="22"></canvas></div>
+        <div class="chart-cell"><div class="ct-title">NETWORK</div><div><span class="ct-val" id="netVal">--</span><span class="ct-unit"> MB/s</span></div><canvas id="cvNET" height="22"></canvas></div>
+        <div class="chart-cell"><div class="ct-title">INFERENCE</div><div><span class="ct-val" id="llmVal">--</span><span class="ct-unit"> T/s</span></div><canvas id="cvLLM" height="22"></canvas></div>
+        <div class="chart-cell"><div class="ct-title">TOKENS</div><div><span class="ct-val" id="tokVal">--</span><span class="ct-unit"> K</span></div><canvas id="cvTOK" height="22"></canvas></div>
       </div>
     </div>
 
@@ -440,14 +409,6 @@ const i18n = {
     connections_title:'◈ ACTIVE CONNECTIONS', skills_title:'◈ SKILL MATRIX', skills_tag:'PROFICIENCY INDEX',
     awards_title:'◈ HONORS & RECOGNITION', career_title:'◈ CAREER LOG // EXPERIENCE TIMELINE',
     chat_title:'◈ IA AGENT // CONVERSATIONAL INTERFACE', exp_label:'EXPERIENCE', cert_label:'CERTIFICATIONS', awards_label:'AWARDS',
-    ibm_role:'Business Architect · ICBC Banking', ibm_desc:'Architecture strategy & tech adoption · Gen AI / WatsonX solutions · Legacy ↔ digital integration · Risk mitigation frameworks',
-    surtank_role:'Digital Innovation Consultant & Project Evaluator', surtank_desc:'Lead evaluator sci-tech projects (economic impact) · "City Solutions Palette" academic paper · Startup advisory · LATAM innovation ecosystems',
-    oracle_role:'Business Architect Public Sector LAD', oracle_desc:'Digital transformation roadmaps for LatAm govs · GovTech Design Thinking & Bootcamps · Oracle for Startups Ambassador · VC–public sector bridge',
-    muni_role:'Director of Entrepreneurs', muni_desc:'Public policies for productive ecosystems · Big Tech + academia + gov collaboration · Regional economic growth facilitation',
-    parkool_desc:'First Smart Parking startup in LATAM · Urban services digitalization · Sustainable mobility · 3,000+ users in Year 1',
-    voda_role:'Sales Manager & Product Tester', voda_desc:'Launched first concept stores Spain · Evaluated UMTS & Europe\'s first mobile video conferencing · Created world\'s first mobile short film contest',
-    neo_role:'CTO & Founder · Barcelona, Spain', neo_desc:'VR scenario creation · 3D design · Audiovisual production · Advertising & institutional content · Short films',
-    utn_role:'Professor · Open Innovation & AI in HealthTech', utn_desc:'MIT 100K LATAM Official Jury (2021 & 2022) · Speaker: Expo Smart City Bogotá · GOJCodeFest Jamaica · Evaluator: NASA · UNDP · Itaipú',
     welcome:'[ AGENT ] Welcome. I\'m Leandro\'s <b>IA Agent</b>. His 20+ year career spans AI, Tech transformation, Startups and entrepreneurship across LATAM, Europe & Japan (JIN). Type any question or use the shortcuts below.',
     sys1:'IA AGENT INITIALIZING...', sys2:'PROFILE DATABASE CONNECTED · NODE ONLINE', sys3:'VERCEL FUNCTION ACTIVE · API KEY SECURED · ALL SYSTEMS GO',
   },
@@ -455,14 +416,6 @@ const i18n = {
     connections_title:'◈ CONEXIONES ACTIVAS', skills_title:'◈ MATRIZ DE HABILIDADES', skills_tag:'ÍNDICE DE COMPETENCIA',
     awards_title:'◈ PREMIOS Y RECONOCIMIENTOS', career_title:'◈ TRAYECTORIA PROFESIONAL',
     chat_title:'◈ AGENTE IA // INTERFAZ CONVERSACIONAL', exp_label:'EXPERIENCIA', cert_label:'CERTIFICACIONES', awards_label:'PREMIOS',
-    ibm_role:'Arquitecto de Negocios · Banca ICBC', ibm_desc:'Estrategia de arquitectura y adopción tecnológica · Soluciones Gen AI / WatsonX · Integración legacy ↔ digital · Marcos de mitigación de riesgos',
-    surtank_role:'Consultor Innovación Digital y Evaluador de Proyectos', surtank_desc:'Evaluador líder proyectos científico-tecnológicos (impacto económico) · "City Solutions Palette" paper académico · Asesoría startups · Ecosistemas innovación LATAM',
-    oracle_role:'Arquitecto de Negocios Sector Público LAD', oracle_desc:'Hojas de ruta transformación digital para gobiernos LatAm · GovTech Design Thinking y Bootcamps · Embajador Oracle for Startups',
-    muni_role:'Director de Emprendedores', muni_desc:'Políticas públicas para ecosistemas productivos · Colaboración Big Tech + academia + gobierno · Facilitación crecimiento económico regional',
-    parkool_desc:'Primera startup de Smart Parking en LATAM · Digitalización servicios urbanos · Movilidad sustentable · 3.000+ usuarios en Año 1',
-    voda_role:'Gerente de Ventas y Product Tester', voda_desc:'Lanzó primeras concept stores Vodafone en España · Evaluó primera videoconferencia móvil de Europa · Creó primer concurso de cortos filmados con celular',
-    neo_role:'CTO y Fundador · Barcelona, España', neo_desc:'Creación escenarios VR · Diseño 3D · Producción audiovisual · Contenido publicitario e institucional · Cortometrajes',
-    utn_role:'Profesor · Innovación Abierta e IA en Salud', utn_desc:'Jurado Oficial MIT 100K LATAM (2021 y 2022) · Speaker: Expo Smart City Bogotá · GOJCodeFest Jamaica · Evaluador: NASA · PNUD · Itaipú',
     welcome:'[ AGENTE ] Bienvenido. Soy el <b>Agente IA</b> de Leandro. Su carrera de 20+ años abarca IA, Transformación tecnológica, Startups y emprendimientos en LATAM, Europa y Japón (JIN). Escribí tu consulta o usá los atajos.',
     sys1:'AGENTE IA INICIALIZANDO...', sys2:'BASE DE DATOS CONECTADA · NODO ONLINE', sys3:'FUNCIÓN VERCEL ACTIVA · API KEY SEGURA · SISTEMAS OK',
   }
@@ -478,7 +431,74 @@ function toggleLang() {
     if (i18n[lang][key]) el.innerHTML = i18n[lang][key];
   });
   document.getElementById('chatInput').placeholder = lang === 'en' ? 'Query Leandro\'s profile...' : 'Consultá el perfil de Leandro...';
+  // Update career cards
+  document.querySelectorAll('.tl-card-role[data-i18n]').forEach(el => {
+    const key = el.dataset.i18n;
+    if (careerI18n[lang][key]) el.textContent = careerI18n[lang][key];
+  });
+  document.querySelectorAll('.tl-card-desc[data-i18n]').forEach(el => {
+    const key = el.dataset.i18n;
+    if (careerI18n[lang][key]) el.textContent = careerI18n[lang][key];
+  });
 }
+
+// Career i18n
+const careerI18n = {
+  en: {
+    ibm_role:'Business Architect · ICBC Banking', ibm_desc:'Architecture strategy & tech adoption · Gen AI / WatsonX solutions · Legacy ↔ digital integration · Risk mitigation frameworks',
+    surtank_role:'Digital Innovation Consultant & Project Evaluator', surtank_desc:'Lead evaluator sci-tech projects (economic impact) · "City Solutions Palette" academic paper · Startup advisory · LATAM innovation ecosystems',
+    oracle_role:'Business Architect Public Sector LAD', oracle_desc:'Digital transformation roadmaps for LatAm govs · GovTech Design Thinking & Bootcamps · Oracle for Startups Ambassador',
+    muni_role:'Director of Entrepreneurs', muni_desc:'Public policies for productive ecosystems · Big Tech + academia + gov collaboration · Regional economic growth facilitation',
+    parkool_role:'CEO & Founder', parkool_desc:'First Smart Parking startup in LATAM · Urban services digitalization · Sustainable mobility · 3,000+ users in Year 1',
+    voda_role:'Sales Manager & Product Tester', voda_desc:'Launched first concept stores Spain · Evaluated Europe\'s first mobile video conferencing · Created world\'s first mobile short film contest',
+    neo_role:'CTO & Founder', neo_desc:'VR scenario creation · 3D design · Audiovisual production · Short films',
+    utn_role:'Professor · Open Innovation & AI HealthTech', utn_desc:'MIT 100K LATAM Jury (2021 & 2022) · Speaker: Expo Smart City Bogotá · GOJCodeFest Jamaica · Evaluator: NASA · UNDP · Itaipú',
+  },
+  es: {
+    ibm_role:'Arquitecto de Negocios · Banca ICBC', ibm_desc:'Estrategia de arquitectura y adopción tecnológica · Soluciones Gen AI / WatsonX · Integración legacy ↔ digital · Marcos de mitigación de riesgos',
+    surtank_role:'Consultor Innovación Digital y Evaluador', surtank_desc:'Evaluador líder proyectos científico-tecnológicos · "City Solutions Palette" paper académico · Asesoría startups · Ecosistemas innovación LATAM',
+    oracle_role:'Arquitecto de Negocios Sector Público LAD', oracle_desc:'Hojas de ruta transformación digital para gobiernos LatAm · GovTech Design Thinking y Bootcamps · Embajador Oracle for Startups',
+    muni_role:'Director de Emprendedores', muni_desc:'Políticas públicas para ecosistemas productivos · Colaboración Big Tech + academia + gobierno · Crecimiento económico regional',
+    parkool_role:'CEO y Fundador', parkool_desc:'Primera startup Smart Parking en LATAM · Digitalización servicios urbanos · Movilidad sustentable · 3.000+ usuarios en Año 1',
+    voda_role:'Gerente de Ventas y Product Tester', voda_desc:'Primeras concept stores Vodafone España · Primera videoconferencia móvil de Europa · Primer concurso de cortos filmados con celular',
+    neo_role:'CTO y Fundador', neo_desc:'Creación escenarios VR · Diseño 3D · Producción audiovisual · Cortometrajes',
+    utn_role:'Profesor · Innovación Abierta e IA Salud', utn_desc:'Jurado MIT 100K LATAM (2021 y 2022) · Speaker: Expo Smart City Bogotá · GOJCodeFest Jamaica · Evaluador: NASA · PNUD · Itaipú',
+  }
+};
+
+// CAREER TIMELINE — horizontal, newest to oldest, clickable
+const careerData = [
+  {date:'2021 → NOW',cur:true,company:'IBM',color:'b',roleKey:'ibm_role',descKey:'ibm_desc'},
+  {date:'2015 → NOW',cur:true,company:'SURTANK',color:'',roleKey:'surtank_role',descKey:'surtank_desc'},
+  {date:'2022 → NOW',cur:true,company:'UTN + BARCELÓ',color:'p',roleKey:'utn_role',descKey:'utn_desc'},
+  {date:'2019 → 2021',cur:false,company:'ORACLE',color:'r',roleKey:'oracle_role',descKey:'oracle_desc'},
+  {date:'2018 → 2019',cur:false,company:'MUNI. 3 DE FEB',color:'',roleKey:'muni_role',descKey:'muni_desc'},
+  {date:'2015 → 2018',cur:false,company:'PARKOOL',color:'y',roleKey:'parkool_role',descKey:'parkool_desc'},
+  {date:'2004 → 2006',cur:false,company:'VODAFONE',color:'r',roleKey:'voda_role',descKey:'voda_desc'},
+  {date:'2000 → 2006',cur:false,company:'NEO VISION',color:'y',roleKey:'neo_role',descKey:'neo_desc'},
+];
+
+const track = document.getElementById('careerTrack');
+careerData.forEach((c,i) => {
+  const lang = curLang.toLowerCase();
+  const card = document.createElement('div');
+  card.className = 'tl-card';
+  card.innerHTML = `
+    <div class="tl-card-dot ${c.color}"></div>
+    <div class="tl-card-connector"></div>
+    <div class="tl-card-box">
+      <div class="tl-card-date">${c.cur?'<span class="cur">':''}${c.date}${c.cur?'</span>':''}</div>
+      <div class="tl-card-company ${c.color}">${c.company}</div>
+      <div class="tl-card-role" data-i18n="${c.roleKey}">${careerI18n[lang][c.roleKey]}</div>
+      <div class="tl-card-desc" data-i18n="${c.descKey}">${careerI18n[lang][c.descKey]}</div>
+    </div>`;
+  card.addEventListener('click', () => {
+    const wasOpen = card.classList.contains('open');
+    document.querySelectorAll('.tl-card.open').forEach(c2 => c2.classList.remove('open'));
+    if (!wasOpen) card.classList.add('open');
+  });
+  track.appendChild(card);
+});
 
 // CLOCK
 function tick(){const n=new Date();document.getElementById('clock').textContent=n.getHours().toString().padStart(2,'0')+':'+n.getMinutes().toString().padStart(2,'0')+':'+n.getSeconds().toString().padStart(2,'0');}
@@ -487,13 +507,13 @@ setInterval(tick,1000);tick();
 // LATENCY
 setInterval(()=>{document.getElementById('lat').textContent=(6+Math.floor(Math.random()*9))+'ms';},2600);
 
-// CHARTS — GPU fixed at 65
-const series={cpu:{id:'cpuVal',cv:'cvCPU',data:[],lo:30,hi:50,color:'#00ff88',prev:40},ram:{id:'ramVal',cv:'cvRAM',data:[],lo:60,hi:75,color:'#44aaff',prev:68},net:{id:'netVal',cv:'cvNET',data:[],lo:3,hi:7,color:'#aa88ff',dec:1,prev:5},llm:{id:'llmVal',cv:'cvLLM',data:[],lo:40,hi:58,color:'#ffcc44',prev:48},tok:{id:'tokVal',cv:'cvTOK',data:[],lo:30,hi:60,color:'#00ffcc',dec:1,prev:45},gpu:{id:'gpuVal',cv:'cvGPU',data:[],lo:65,hi:65,color:'#ff6688',prev:65,fixed:true}};
+// CHARTS — no CPU or GPU
+const series={ram:{id:'ramVal',cv:'cvRAM',data:[],lo:60,hi:75,color:'#44aaff',prev:68},net:{id:'netVal',cv:'cvNET',data:[],lo:3,hi:7,color:'#aa88ff',dec:1,prev:5},llm:{id:'llmVal',cv:'cvLLM',data:[],lo:40,hi:58,color:'#ffcc44',prev:48},tok:{id:'tokVal',cv:'cvTOK',data:[],lo:30,hi:60,color:'#00ffcc',dec:1,prev:45}};
 function rnd(a,b){return a+Math.random()*(b-a);}
-function smooth(s){if(s.fixed)return s.prev;const target=rnd(s.lo,s.hi);s.prev=s.prev*0.85+target*0.15;return s.prev;}
+function smooth(s){const target=rnd(s.lo,s.hi);s.prev=s.prev*0.85+target*0.15;return s.prev;}
 function sparkline(id,data,color){
   const c=document.getElementById(id);if(!c)return;
-  const w=c.parentElement.clientWidth,h=36;c.width=w;c.height=h;
+  const w=c.parentElement.clientWidth,h=28;c.width=w;c.height=h;
   const ctx=c.getContext('2d');ctx.clearRect(0,0,w,h);
   if(data.length<2)return;
   const mn=Math.min(...data),mx=Math.max(...data),rng=mx-mn||1;
@@ -502,8 +522,6 @@ function sparkline(id,data,color){
   data.forEach((v,i)=>{const x=(i/(data.length-1))*w,y=h-(((v-mn)/rng)*(h-6)+3);i===0?ctx.moveTo(x,y):ctx.lineTo(x,y);});
   ctx.stroke();
   ctx.shadowBlur=0;ctx.lineTo(w,h);ctx.lineTo(0,h);ctx.closePath();ctx.fillStyle=color+'14';ctx.fill();
-  ctx.strokeStyle='#ffffff07';ctx.lineWidth=1;
-  [0.33,0.67].forEach(t=>{ctx.beginPath();ctx.moveTo(0,t*h);ctx.lineTo(w,t*h);ctx.stroke();});
 }
 function updateAll(){
   for(const k in series){
