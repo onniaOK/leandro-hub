@@ -186,6 +186,80 @@ footer{background:var(--bg2);border-top:1px solid var(--border);display:flex;ali
 /* TOOLTIP */
 .tooltip{position:fixed;z-index:8000;background:var(--bg3);border:1px solid var(--border2);padding:6px 10px;font-size:7.5px;color:var(--white);pointer-events:none;opacity:0;transition:opacity .15s;max-width:200px;line-height:1.5;}
 .tooltip.show{opacity:1;}
+
+/* ═══ MOBILE RESPONSIVE ═══ */
+@media(max-width:768px){
+  html,body{overflow:auto;font-size:12px;}
+  .shell{display:flex;flex-direction:column;height:auto;min-height:100vh;}
+
+  /* HEADER */
+  header{flex-wrap:wrap;padding:8px 10px;gap:6px;height:auto;min-height:auto;}
+  .h-logo{font-size:14px;letter-spacing:3px;border-right:none;padding-right:0;}
+  .h-sub{display:none;}
+  .h-badge{font-size:7px;padding:2px 6px;}
+  .h-metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;width:100%;margin-left:0;margin-top:4px;}
+  .h-clock{font-size:12px;min-width:auto;border-left:none;padding-left:0;margin-left:auto;}
+
+  /* MAIN — stack vertically */
+  .main{display:flex;flex-direction:column;overflow:visible;}
+
+  /* CHAT first and prominent */
+  .left{border-right:none;border-bottom:1px solid var(--border);min-height:50vh;max-height:70vh;display:flex;flex-direction:column;}
+  .chat-log{min-height:200px;max-height:40vh;}
+  .qbtns{gap:4px;}
+  .qbtn{font-size:8px;padding:5px 8px;}
+  #chatInput{font-size:11px;}
+  .cmsg-body{font-size:11px;line-height:1.7;padding:6px 10px;}
+  .cmsg-from{font-size:8px;}
+
+  /* RIGHT — stack all sections */
+  .right{display:flex;flex-direction:column;overflow:visible;}
+  .r-top{display:flex;flex-direction:column;border-bottom:1px solid var(--border);}
+  .topo-panel{border-right:none;border-bottom:1px solid var(--border);min-height:160px;}
+  .charts-grid{grid-template-columns:1fr 1fr;grid-template-rows:auto;}
+  .chart-cell{padding:8px 10px;}
+  .ct-val{font-size:16px;}
+
+  /* TIMELINE */
+  .r-mid{max-height:none;overflow:visible;}
+  .r-mid-body{max-height:none;overflow:visible;padding:10px;}
+  .tl-item{grid-template-columns:60px 1px 1fr;}
+  .tl-company{font-size:10px;}
+  .tl-role{font-size:9px;}
+  .tl-desc{font-size:8px;color:var(--gray);}
+  .tl-date{font-size:8px;}
+
+  /* BOTTOM PANELS */
+  .r-bot{display:flex;flex-direction:column;}
+  .conn-panel,.skills-panel,.awards-panel{border-right:none;border-bottom:1px solid var(--border);min-height:auto;}
+  .conn-list,.skill-list,.awards-list{padding:8px 10px;}
+  .conn-item{font-size:9px;padding:6px 0;}
+  .conn-name{font-size:9px;}
+  .conn-meta{font-size:8px;}
+  .skill-name{font-size:9px;}
+  .award-item{font-size:9px;}
+  .award-sym{font-size:10px;}
+
+  /* FOOTER */
+  footer{flex-wrap:wrap;padding:8px 10px;gap:6px;height:auto;min-height:auto;}
+  .f-stack{flex-wrap:wrap;gap:4px;width:100%;}
+  .f-tech{font-size:8px;}
+  .f-links{margin-left:0;width:100%;justify-content:center;gap:8px;}
+  .f-link{font-size:8px;padding:4px 10px;}
+  .f-note{border-left:none;padding-left:0;text-align:center;width:100%;font-size:7px;}
+
+  /* Hide scanlines on mobile for performance */
+  body::after,body::before{display:none;}
+  .panel-hdr-title{font-size:8px;}
+  .panel-hdr-tag{font-size:7px;}
+}
+
+@media(max-width:380px){
+  .h-logo{font-size:12px;letter-spacing:2px;}
+  .h-metrics{grid-template-columns:repeat(2,1fr);}
+  .charts-grid{grid-template-columns:1fr;}
+  .qbtn{font-size:7px;padding:4px 6px;}
+}
 </style>
 </head>
 <body>
