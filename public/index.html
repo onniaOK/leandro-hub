@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>L.MOCCHEGIANI // INNOVATION HUB</title>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:#080808;--bg2:#0e0e0e;--bg3:#131313;--bg4:#181818;
+  --border:#1e1e1e;--border2:#252525;
+  --green:#00ff88;--gdim:rgba(0,255,136,0.15);--gglow:rgba(0,255,136,0.06);
+  --blue:#44aaff;--bdim:rgba(68,170,255,0.2);
+  --purple:#aa88ff;--yellow:#ffcc44;--red:#ff4455;
+  --white:#e4e4e4;--gray:#4a4a4a;--gray2:#2a2a2a;
+  --font:'JetBrains Mono',monospace;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html,body{width:100%;height:100%;background:var(--bg);color:var(--white);font-family:var(--font);font-size:11px;overflow:hidden;}
+body::after{content:'';position:fixed;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 3px,rgba(0,0,0,0.055) 3px,rgba(0,0,0,0.055) 4px);pointer-events:none;z-index:9000;}
+body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellipse at center,transparent 55%,rgba(0,0,0,0.65) 100%);pointer-events:none;z-index:9001;}
+
+.shell{display:grid;grid-template-rows:50px 1fr 34px;height:100vh;width:100vw;}
+
+/* HEADER */
+header{background:var(--bg2);border-bottom:1px solid var(--border);display:flex;align-items:center;padding:0 14px;gap:14px;position:relative;overflow:hidden;}
+header::after{content:'';position:absolute;bottom:0;left:-100%;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--green),transparent);animation:hline 5s linear infinite;}
+@keyframes hline{0%{left:-100%}100%{left:100%}}
+.h-logo{font-size:15px;font-weight:800;letter-spacing:4px;color:var(--white);border-right:1px solid var(--border2);padding-right:14px;white-space:nowrap;}
+.h-logo span{color:var(--green);}
+.h-sub{display:flex;flex-direction:column;gap:1px;border-right:1px solid var(--border2);padding-right:14px;}
+.h-role{font-size:7.5px;color:var(--green);letter-spacing:2px;font-weight:700;}
+.h-spec{font-size:7px;color:var(--gray);letter-spacing:1px;}
+.h-badge{display:flex;align-items:center;gap:6px;padding:3px 9px;border:1px solid var(--gdim);background:var(--gglow);font-size:7.5px;letter-spacing:1.5px;color:var(--green);white-space:nowrap;}
+.h-badge.blue{border-color:var(--bdim);color:var(--blue);background:rgba(68,170,255,0.04);}
+.dot{width:6px;height:6px;border-radius:50%;flex-shrink:0;background:var(--green);box-shadow:0 0 8px var(--green);animation:dpulse 1.6s ease-in-out infinite;}
+.dot.blue{background:var(--blue);box-shadow:0 0 8px var(--blue);}
+.dot.yellow{background:var(--yellow);box-shadow:0 0 8px var(--yellow);}
+@keyframes dpulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:0.3;transform:scale(0.6)}}
+.h-metrics{display:flex;gap:16px;margin-left:auto;}
+.hm{display:flex;flex-direction:column;gap:1px;}
+.hm-label{font-size:6.5px;letter-spacing:1px;color:var(--gray);}
+.hm-val{color:var(--green);font-weight:700;font-size:9px;}
+.hm-val.b{color:var(--blue);}
+.hm-val.w{color:var(--white);}
+.h-clock{font-size:14px;font-weight:800;color:var(--green);letter-spacing:3px;border-left:1px solid var(--border2);padding-left:14px;min-width:100px;font-variant-numeric:tabular-nums;}
+
+/* MAIN */
+.main{display:grid;grid-template-columns:320px 1fr;overflow:hidden;}
+
+/* LEFT */
+.left{border-right:1px solid var(--border);display:flex;flex-direction:column;background:var(--bg2);overflow:hidden;}
+.panel-hdr{padding:7px 10px;border-bottom:1px solid var(--border);background:var(--bg3);display:flex;align-items:center;justify-content:space-between;}
+.panel-hdr-title{font-size:7.5px;letter-spacing:2px;color:var(--green);font-weight:700;}
+.panel-hdr-tag{font-size:7px;color:var(--gray);letter-spacing:1px;}
+.chat-log{flex:1;overflow-y:auto;padding:10px;display:flex;flex-direction:column;gap:8px;scrollbar-width:thin;scrollbar-color:var(--gray2) transparent;}
+.chat-log::-webkit-scrollbar{width:3px;}
+.chat-log::-webkit-scrollbar-thumb{background:var(--gray2);}
+.cmsg{display:flex;flex-direction:column;gap:2px;animation:fadeup .3s ease;}
+@keyframes fadeup{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:none}}
+.cmsg-from{font-size:7px;letter-spacing:1.5px;color:var(--gray);}
+.cmsg-from.agent{color:var(--green);}
+.cmsg-from.user{color:var(--blue);}
+.cmsg-from.sys{color:var(--yellow);}
+.cmsg-body{font-size:9.5px;line-height:1.65;padding:5px 8px;background:rgba(255,255,255,0.018);border-left:2px solid var(--gray2);}
+.cmsg-body.agent{border-color:rgba(0,255,136,0.3);}
+.cmsg-body.user{border-color:rgba(68,170,255,0.3);color:#9ac8ff;}
+.cmsg-body.sys{border-color:rgba(255,204,68,0.3);color:var(--yellow);}
+.cmsg-body .g{color:var(--green);font-weight:700;}
+.cmsg-body .b{color:var(--blue);}
+.cmsg-body .y{color:var(--yellow);}
+.cmsg-body .p{color:var(--purple);}
+.cmsg-body .dim{color:var(--gray);}
+.typing{display:flex;align-items:center;gap:8px;padding:5px 10px;font-size:8px;color:var(--green);opacity:0;transition:opacity .2s;min-height:22px;}
+.typing.show{opacity:1;}
+.tdots span{display:inline-block;width:4px;height:4px;background:var(--green);border-radius:50%;margin:0 1.5px;animation:tbounce 1.2s ease-in-out infinite;}
+.tdots span:nth-child(2){animation-delay:.2s;}
+.tdots span:nth-child(3){animation-delay:.4s;}
+@keyframes tbounce{0%,80%,100%{transform:translateY(0)}40%{transform:translateY(-5px)}}
+.chat-foot{border-top:1px solid var(--border);padding:8px;background:var(--bg3);}
+.input-wrap{display:flex;align-items:center;gap:6px;border:1px solid var(--gray2);padding:6px 8px;background:var(--bg);transition:border-color .2s,box-shadow .2s;}
+.input-wrap:focus-within{border-color:var(--green);box-shadow:0 0 10px var(--gglow);}
+.prompt-sym{color:var(--green);font-size:12px;flex-shrink:0;}
+#chatInput{flex:1;background:none;border:none;outline:none;color:var(--white);font-family:var(--font);font-size:9.5px;caret-color:var(--green);}
+#chatInput::placeholder{color:var(--gray);}
+.qbtns{display:flex;flex-wrap:wrap;gap:3px;margin-top:6px;}
+.qbtn{font-size:7px;letter-spacing:.5px;padding:3px 7px;border:1px solid var(--gray2);background:none;color:var(--gray);font-family:var(--font);cursor:pointer;transition:all .15s;}
+.qbtn:hover{border-color:var(--green);color:var(--green);background:var(--gglow);}
+
+/* RIGHT */
+.right{display:grid;grid-template-rows:210px 1fr 144px;overflow:hidden;}
+.r-top{display:grid;grid-template-columns:1fr 1fr;border-bottom:1px solid var(--border);}
+
+/* TOPOLOGY */
+.topo-panel{border-right:1px solid var(--border);display:flex;flex-direction:column;overflow:hidden;}
+.topo-body{flex:1;padding:8px 12px;display:flex;align-items:center;justify-content:center;}
+svg.topo{width:100%;height:100%;overflow:visible;}
+.t-node rect{fill:var(--bg3);stroke:var(--border2);stroke-width:1;transition:stroke .2s;}
+.t-node:hover rect{stroke:var(--green);}
+.t-node text{fill:var(--white);font-family:var(--font);font-size:7px;font-weight:500;}
+.t-node .tsub{fill:var(--gray);font-size:6px;}
+.t-node .tgrn{fill:var(--green);font-size:6.5px;}
+.t-node .tbl{fill:var(--blue);font-size:6.5px;}
+.t-node .trd{fill:var(--red);font-size:6.5px;}
+.t-edge{stroke:var(--border2);stroke-width:1;fill:none;}
+.t-edge.g{stroke:var(--green);stroke-dasharray:4 3;animation:tdash 1.8s linear infinite;}
+.t-edge.b{stroke:var(--blue);stroke-dasharray:4 3;animation:tdash 2.4s linear infinite;}
+@keyframes tdash{from{stroke-dashoffset:0}to{stroke-dashoffset:-28}}
+
+/* CHARTS */
+.charts-grid{display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr 1fr;gap:1px;background:var(--border);}
+.chart-cell{background:var(--bg2);padding:6px 8px;display:flex;flex-direction:column;gap:2px;overflow:hidden;}
+.ct-title{font-size:7px;letter-spacing:1.5px;color:var(--gray);font-weight:700;}
+.ct-val{font-size:18px;font-weight:800;color:var(--green);line-height:1;}
+.ct-unit{font-size:7px;color:var(--gray);}
+canvas{display:block;width:100%!important;}
+
+/* MID: TIMELINE */
+.r-mid{border-bottom:1px solid var(--border);display:flex;flex-direction:column;overflow:hidden;}
+.r-mid-body{flex:1;overflow-y:auto;padding:8px 14px;display:flex;flex-direction:column;gap:0;scrollbar-width:thin;scrollbar-color:var(--gray2) transparent;}
+.r-mid-body::-webkit-scrollbar{width:3px;}
+.r-mid-body::-webkit-scrollbar-thumb{background:var(--gray2);}
+.tl-item{display:grid;grid-template-columns:76px 1px 1fr;gap:0 10px;padding-bottom:12px;}
+.tl-date{font-size:7px;color:var(--gray);text-align:right;padding-top:2px;line-height:1.4;}
+.tl-date .cur{color:var(--green);display:block;}
+.tl-line{display:flex;flex-direction:column;align-items:center;}
+.tl-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0;background:var(--bg);border:1.5px solid var(--green);box-shadow:0 0 6px var(--green);margin-top:2px;}
+.tl-dot.b{border-color:var(--blue);box-shadow:0 0 6px var(--blue);}
+.tl-dot.r{border-color:var(--red);box-shadow:0 0 6px var(--red);}
+.tl-dot.y{border-color:var(--yellow);box-shadow:0 0 6px var(--yellow);}
+.tl-dot.p{border-color:var(--purple);box-shadow:0 0 6px var(--purple);}
+.tl-vline{flex:1;width:1px;background:var(--border2);min-height:18px;}
+.tl-company{font-size:8.5px;font-weight:700;color:var(--white);letter-spacing:1px;}
+.tl-company.b{color:var(--blue);}
+.tl-company.r{color:var(--red);}
+.tl-company.y{color:var(--yellow);}
+.tl-company.p{color:var(--purple);}
+.tl-role{font-size:7.5px;color:var(--gray);letter-spacing:.5px;margin-bottom:2px;}
+.tl-desc{font-size:7px;color:#484848;line-height:1.5;}
+
+/* BOT */
+.r-bot{display:grid;grid-template-columns:1fr 1fr 1fr;}
+.conn-panel{border-right:1px solid var(--border);display:flex;flex-direction:column;overflow:hidden;}
+.conn-list{flex:1;overflow-y:auto;padding:5px 8px;}
+.conn-item{display:flex;align-items:center;justify-content:space-between;padding:4px 0;border-bottom:1px solid var(--border);font-size:8px;}
+.conn-item:last-child{border:none;}
+.conn-left{display:flex;align-items:center;gap:6px;}
+.conn-name{color:var(--white);letter-spacing:.5px;}
+.conn-meta{font-size:6.5px;color:var(--gray);}
+.conn-right{display:flex;align-items:center;gap:6px;}
+.conn-rate{font-size:7px;color:var(--green);}
+.conn-count{font-size:7px;padding:1px 5px;border:1px solid var(--gdim);color:var(--green);}
+.skills-panel{border-right:1px solid var(--border);display:flex;flex-direction:column;overflow:hidden;}
+.skill-list{flex:1;padding:6px 8px;overflow-y:auto;display:flex;flex-direction:column;gap:5px;}
+.skill-item{display:flex;flex-direction:column;gap:2px;}
+.skill-name{font-size:7px;color:var(--white);letter-spacing:.5px;display:flex;justify-content:space-between;}
+.skill-name span{color:var(--green);font-size:7px;}
+.skill-bar-bg{height:3px;background:var(--border2);position:relative;overflow:hidden;}
+.skill-bar{height:100%;background:var(--green);transition:width 1.5s cubic-bezier(.23,1,.32,1);width:0;}
+.skill-bar.b{background:var(--blue);}
+.skill-bar.p{background:var(--purple);}
+.skill-bar.y{background:var(--yellow);}
+.awards-panel{display:flex;flex-direction:column;overflow:hidden;}
+.awards-list{flex:1;padding:5px 8px;overflow-y:auto;display:flex;flex-direction:column;gap:2px;}
+.award-item{display:flex;align-items:flex-start;gap:6px;padding:3px 0;border-bottom:1px solid var(--border);font-size:7.5px;line-height:1.4;}
+.award-item:last-child{border:none;}
+.award-sym{color:var(--yellow);font-size:9px;flex-shrink:0;margin-top:1px;}
+.award-text{color:var(--white);}
+.award-year{font-size:6.5px;color:var(--gray);}
+
+/* FOOTER */
+footer{background:var(--bg2);border-top:1px solid var(--border);display:flex;align-items:center;padding:0 14px;gap:16px;font-size:7px;color:var(--gray);letter-spacing:1px;}
+.f-stack{display:flex;gap:8px;flex:1;}
+.f-tech{color:var(--gray);cursor:default;transition:color .2s;}
+.f-tech:hover{color:var(--green);}
+.f-sep{color:var(--border2);}
+.f-links{display:flex;gap:10px;margin-left:auto;}
+.f-link{color:var(--gray);text-decoration:none;letter-spacing:1px;font-size:7px;border:1px solid var(--border2);padding:2px 8px;transition:all .15s;}
+.f-link:hover{border-color:var(--green);color:var(--green);background:var(--gglow);}
+.f-note{font-size:6.5px;color:var(--gray2);border-left:1px solid var(--border);padding-left:14px;}
+
+/* TOOLTIP */
+.tooltip{position:fixed;z-index:8000;background:var(--bg3);border:1px solid var(--border2);padding:6px 10px;font-size:7.5px;color:var(--white);pointer-events:none;opacity:0;transition:opacity .15s;max-width:200px;line-height:1.5;}
+.tooltip.show{opacity:1;}
+</style>
+</head>
+<body>
+<div class="tooltip" id="tt"></div>
+<div class="shell">
+
+<!-- HEADER -->
+<header>
+  <div class="h-logo">L.<span>MOCCHEGIANI</span></div>
+  <div class="h-sub">
+    <div class="h-role">DIGITAL INNOVATOR · AI STRATEGY · GOVTECH · EMERGING TECH</div>
+    <div class="h-spec">TRANSFORMATION CONSULTANT · LATAM &amp; GLOBAL · 20+ YRS EXP</div>
+  </div>
+  <div class="h-badge"><div class="dot"></div>SYSTEM: OPERATIONAL</div>
+  <div class="h-badge blue"><div class="dot blue"></div>LINKEDIN SYNC v3.1 · LIVE</div>
+  <div class="h-metrics">
+    <div class="hm"><span class="hm-label">NODE</span><span class="hm-val w">CASEROS, BA</span></div>
+    <div class="hm"><span class="hm-label">LATENCY</span><span class="hm-val" id="lat">9ms</span></div>
+    <div class="hm"><span class="hm-label">UPTIME</span><span class="hm-val">99.97%</span></div>
+    <div class="hm"><span class="hm-label">EXPERIENCE</span><span class="hm-val w">20+ YRS</span></div>
+    <div class="hm"><span class="hm-label">CERTIFICATIONS</span><span class="hm-val">18</span></div>
+    <div class="hm"><span class="hm-label">AWARDS</span><span class="hm-val">7+</span></div>
+  </div>
+  <div class="h-clock" id="clock">--:--:--</div>
+</header>
+
+<!-- MAIN -->
+<div class="main">
+
+  <!-- LEFT: ONNIA -->
+  <div class="left">
+    <div class="panel-hdr">
+      <span class="panel-hdr-title">◈ ONNIA AGENT // CONVERSATIONAL INTERFACE</span>
+      <span class="panel-hdr-tag">v2.4 · RAG ENABLED</span>
+    </div>
+    <div class="chat-log" id="chatLog"></div>
+    <div class="typing" id="typing">
+      <span>ONNIA PROCESSING</span>
+      <div class="tdots"><span></span><span></span><span></span></div>
+    </div>
+    <div class="chat-foot">
+      <div class="input-wrap">
+        <span class="prompt-sym">›</span>
+        <input type="text" id="chatInput" placeholder="Query Leandro's profile...">
+      </div>
+      <div class="qbtns">
+        <button class="qbtn" onclick="askQ('Who is Leandro?')">WHO IS HE</button>
+        <button class="qbtn" onclick="askQ('IBM role and impact')">IBM</button>
+        <button class="qbtn" onclick="askQ('Oracle experience')">ORACLE</button>
+        <button class="qbtn" onclick="askQ('Big Tech experience Vodafone Telefonica Spain')">BIG TECH</button>
+        <button class="qbtn" onclick="askQ('Startup history PARKOOL')">STARTUPS</button>
+        <button class="qbtn" onclick="askQ('Academic and teaching')">ACADEMIA</button>
+        <button class="qbtn" onclick="askQ('Awards and recognition')">AWARDS</button>
+        <button class="qbtn" onclick="askQ('Tech stack and skills')">TECH STACK</button>
+        <button class="qbtn" onclick="askQ('Japan Innovation Network JIN international work')">JIN JAPAN</button>
+        <button class="qbtn" onclick="askQ('International work global')">GLOBAL</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- RIGHT -->
+  <div class="right">
+
+    <!-- TOP ROW -->
+    <div class="r-top">
+      <!-- TOPOLOGY -->
+      <div class="topo-panel">
+        <div class="panel-hdr">
+          <span class="panel-hdr-title">◈ ARCHITECTURE TOPOLOGY // ONNIA INFRA</span>
+          <span class="panel-hdr-tag">LIVE</span>
+        </div>
+        <div class="topo-body">
+          <svg class="topo" viewBox="0 0 460 148">
+            <!-- Row 1 edges -->
+            <path class="t-edge g" d="M92,40 L138,40"/>
+            <path class="t-edge g" d="M208,40 L252,40"/>
+            <path class="t-edge g" d="M322,40 L368,40"/>
+            <!-- Row 2 edges -->
+            <path class="t-edge b" d="M92,110 L138,110"/>
+            <path class="t-edge b" d="M208,110 L252,110"/>
+            <path class="t-edge b" d="M322,110 L368,110"/>
+            <!-- Vertical -->
+            <line class="t-edge" x1="173" y1="56" x2="173" y2="94" stroke-dasharray="2,3"/>
+            <line class="t-edge" x1="287" y1="56" x2="287" y2="94" stroke-dasharray="2,3"/>
+            <!-- Row 1 Nodes -->
+            <g class="t-node" data-tip="MiniPC Cluster running K8s locally in Caseros, BA. On-premise compute.">
+              <rect x="0" y="22" width="92" height="36" rx="2"/>
+              <text x="46" y="36" text-anchor="middle">ON-PREM INFRA</text>
+              <text x="46" y="48" text-anchor="middle" class="tsub">MiniPC Cluster</text>
+              <circle cx="82" cy="27" r="3" fill="#00ff88"/>
+            </g>
+            <g class="t-node" data-tip="Kubernetes orchestration + Tailscale VPN for secure zero-trust mesh networking between nodes.">
+              <rect x="138" y="22" width="70" height="36" rx="2"/>
+              <text x="173" y="36" text-anchor="middle">K8s + VPN</text>
+              <text x="173" y="48" text-anchor="middle" class="tsub">Tailscale Mesh</text>
+            </g>
+            <g class="t-node" data-tip="ONNIA: Leandro's personal AI agent. Orchestrates all services, RAG, and profile inference.">
+              <rect x="252" y="16" width="70" height="48" rx="2" stroke="#00ff88" stroke-width="1.5"/>
+              <text x="287" y="31" text-anchor="middle" class="tgrn">◈ ONNIA</text>
+              <text x="287" y="43" text-anchor="middle">AGENT SVC</text>
+              <text x="287" y="55" text-anchor="middle" class="tsub">Orchestrator</text>
+            </g>
+            <g class="t-node" data-tip="Vector DB (ChromaDB) for semantic search across Leandro's full knowledge base and CV.">
+              <rect x="368" y="22" width="70" height="36" rx="2"/>
+              <text x="403" y="36" text-anchor="middle">VECTOR DB</text>
+              <text x="403" y="48" text-anchor="middle" class="tsub">ChromaDB</text>
+            </g>
+            <!-- Row 2 Nodes -->
+            <g class="t-node" data-tip="IBM Cloud + WatsonX API integration. Enterprise-grade hybrid cloud architecture.">
+              <rect x="0" y="92" width="92" height="36" rx="2"/>
+              <text x="46" y="106" text-anchor="middle" class="tbl">IBM CLOUD</text>
+              <text x="46" y="118" text-anchor="middle" class="tsub">WatsonX API</text>
+            </g>
+            <g class="t-node" data-tip="Oracle Cloud Infrastructure for scalable enterprise workloads and startup ecosystem management.">
+              <rect x="138" y="92" width="70" height="36" rx="2"/>
+              <text x="173" y="106" text-anchor="middle" class="trd">ORACLE OCI</text>
+              <text x="173" y="118" text-anchor="middle" class="tsub">Cloud Infra</text>
+            </g>
+            <g class="t-node" data-tip="Local LLM inference — DeepSeek R1 + Qwen 2.5 running fully on-premise. Zero data leakage.">
+              <rect x="252" y="92" width="70" height="36" rx="2"/>
+              <text x="287" y="103" text-anchor="middle">LOCAL LLM</text>
+              <text x="287" y="113" text-anchor="middle" class="tgrn">DeepSeek R1</text>
+              <text x="287" y="122" text-anchor="middle" class="tsub">+ Qwen 2.5</text>
+            </g>
+            <g class="t-node" data-tip="GitHub: tech portfolio, open source contributions, and innovation projects.">
+              <rect x="368" y="92" width="70" height="36" rx="2"/>
+              <text x="403" y="106" text-anchor="middle">GITHUB</text>
+              <text x="403" y="118" text-anchor="middle" class="tsub">Repos · OSS</text>
+            </g>
+          </svg>
+        </div>
+      </div>
+
+      <!-- CHARTS -->
+      <div class="charts-grid">
+        <div class="chart-cell">
+          <div class="ct-title">CPU LOAD (MiniPC)</div>
+          <div><span class="ct-val" id="cpuVal">--</span><span class="ct-unit"> %</span></div>
+          <canvas id="cvCPU" height="28"></canvas>
+        </div>
+        <div class="chart-cell">
+          <div class="ct-title">RAM UTILIZATION</div>
+          <div><span class="ct-val" id="ramVal">--</span><span class="ct-unit"> %</span></div>
+          <canvas id="cvRAM" height="28"></canvas>
+        </div>
+        <div class="chart-cell">
+          <div class="ct-title">NETWORK THROUGHPUT</div>
+          <div><span class="ct-val" id="netVal">--</span><span class="ct-unit"> MB/s</span></div>
+          <canvas id="cvNET" height="28"></canvas>
+        </div>
+        <div class="chart-cell">
+          <div class="ct-title">MODEL INFERENCE SPEED</div>
+          <div><span class="ct-val" id="llmVal">--</span><span class="ct-unit"> T/s</span></div>
+          <canvas id="cvLLM" height="28"></canvas>
+        </div>
+        <div class="chart-cell">
+          <div class="ct-title">TOKENS GENERATED</div>
+          <div><span class="ct-val" id="tokVal">--</span><span class="ct-unit"> K</span></div>
+          <canvas id="cvTOK" height="28"></canvas>
+        </div>
+        <div class="chart-cell">
+          <div class="ct-title">GPU TEMPERATURE</div>
+          <div><span class="ct-val" id="gpuVal">--</span><span class="ct-unit"> °C</span></div>
+          <canvas id="cvGPU" height="28"></canvas>
+        </div>
+      </div>
+    </div>
+
+    <!-- MID: TIMELINE -->
+    <div class="r-mid">
+      <div class="panel-hdr">
+        <span class="panel-hdr-title">◈ CAREER LOG // EXPERIENCE TIMELINE</span>
+        <span class="panel-hdr-tag">20+ YRS · LATAM &amp; EUROPE</span>
+      </div>
+      <div class="r-mid-body">
+        <div class="tl-item">
+          <div class="tl-date"><span class="cur">2021</span><span>→ PRESENT</span></div>
+          <div class="tl-line"><div class="tl-dot b"></div><div class="tl-vline"></div></div>
+          <div><div class="tl-company b">IBM</div><div class="tl-role">Business Architect · ICBC Banking</div><div class="tl-desc">Architecture strategy &amp; tech adoption · Gen AI / WatsonX solutions · Legacy ↔ digital integration · Risk mitigation frameworks</div></div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-date"><span>2015</span><span>→ PRESENT</span></div>
+          <div class="tl-line"><div class="tl-dot"></div><div class="tl-vline"></div></div>
+          <div><div class="tl-company">SURTANK</div><div class="tl-role">Digital Innovation Consultant &amp; Project Evaluator</div><div class="tl-desc">Lead evaluator sci-tech projects (economic impact) · "City Solutions Palette" academic paper · Startup advisory · LATAM innovation ecosystems</div></div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-date"><span>2019</span><span>→ 2021</span></div>
+          <div class="tl-line"><div class="tl-dot r"></div><div class="tl-vline"></div></div>
+          <div><div class="tl-company r">ORACLE</div><div class="tl-role">Business Architect Public Sector LAD</div><div class="tl-desc">Digital transformation roadmaps for LatAm govs · GovTech Design Thinking &amp; Bootcamps · Oracle for Startups Ambassador · VC–public sector bridge</div></div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-date"><span>2018</span><span>→ 2019</span></div>
+          <div class="tl-line"><div class="tl-dot"></div><div class="tl-vline"></div></div>
+          <div><div class="tl-company">MUNI. TRES DE FEBRERO</div><div class="tl-role">Director of Entrepreneurs</div><div class="tl-desc">Public policies for productive ecosystems · Big Tech + academia + gov collaboration · Regional economic growth facilitation</div></div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-date"><span>2015</span><span>→ 2018</span></div>
+          <div class="tl-line"><div class="tl-dot y"></div><div class="tl-vline"></div></div>
+          <div><div class="tl-company y">PARKOOL</div><div class="tl-role">CEO &amp; Founder</div><div class="tl-desc">First Smart Parking startup in LATAM · Urban services digitalization · Sustainable mobility · 3,000+ users in Year 1</div></div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-date"><span>2004</span><span>→ 2006</span></div>
+          <div class="tl-line"><div class="tl-dot r"></div><div class="tl-vline"></div></div>
+          <div><div class="tl-company r">VODAFONE · BARCELONA</div><div class="tl-role">Sales Manager &amp; Product Tester</div><div class="tl-desc">Launched first concept stores Spain · Evaluated UMTS &amp; Europe's first mobile video conferencing · Created world's first mobile short film contest</div></div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-date"><span>2000</span><span>→ 2006</span></div>
+          <div class="tl-line"><div class="tl-dot y"></div><div class="tl-vline"></div></div>
+          <div><div class="tl-company y">NEO VISION PRODUCCIONES</div><div class="tl-role">CTO &amp; Founder · Barcelona, Spain</div><div class="tl-desc">VR scenario creation · 3D design · Audiovisual production · Advertising &amp; institutional content · Short films</div></div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-date"><span>2022</span><span>→ NOW</span></div>
+          <div class="tl-line"><div class="tl-dot p"></div><div class="tl-vline"></div></div>
+          <div><div class="tl-company p">UTN + FUNDACIÓN BARCELÓ</div><div class="tl-role">Professor · Open Innovation &amp; AI in HealthTech</div><div class="tl-desc">MIT 100K LATAM Official Jury (2021 &amp; 2022) · Speaker: Expo Smart City Bogotá · GOJCodeFest Jamaica · Evaluator: NASA · UNDP · Itaipú</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- BOT ROW -->
+    <div class="r-bot">
+      <div class="conn-panel">
+        <div class="panel-hdr">
+          <span class="panel-hdr-title">◈ ACTIVE CONNECTIONS</span>
+          <span class="panel-hdr-tag">NODES ONLINE</span>
+        </div>
+        <div class="conn-list" id="connList"></div>
+      </div>
+      <div class="skills-panel">
+        <div class="panel-hdr">
+          <span class="panel-hdr-title">◈ SKILL MATRIX</span>
+          <span class="panel-hdr-tag">PROFICIENCY INDEX</span>
+        </div>
+        <div class="skill-list" id="skillList"></div>
+      </div>
+      <div class="awards-panel">
+        <div class="panel-hdr">
+          <span class="panel-hdr-title">◈ HONORS &amp; RECOGNITION</span>
+          <span class="panel-hdr-tag">VALIDATED</span>
+        </div>
+        <div class="awards-list" id="awardsList"></div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <span style="color:var(--gray);letter-spacing:1px;">STACK:</span>
+  <div class="f-stack">
+    <span class="f-tech">DOCKER</span><span class="f-sep">·</span>
+    <span class="f-tech">KUBERNETES</span><span class="f-sep">·</span>
+    <span class="f-tech">DEEPSEEK</span><span class="f-sep">·</span>
+    <span class="f-tech">WATSONX</span><span class="f-sep">·</span>
+    <span class="f-tech">PYTHON</span><span class="f-sep">·</span>
+    <span class="f-tech">ORACLE OCI</span><span class="f-sep">·</span>
+    <span class="f-tech">AWS</span><span class="f-sep">·</span>
+    <span class="f-tech">VUE.JS</span><span class="f-sep">·</span>
+    <span class="f-tech">BLOCKCHAIN</span>
+  </div>
+  <div class="f-links">
+    <a class="f-link" href="https://linkedin.com/in/leandromocchegiani" target="_blank">[ LINKEDIN ]</a>
+    <a class="f-link" href="mailto:lmocchegiani@gmail.com">[ CONTACT ]</a>
+  </div>
+  <div class="f-note">100% LOCALLY HOSTED &amp; OPERATED · CASEROS, BA, ARG</div>
+</footer>
+
+</div>
+
+<script>
+// CLOCK
+function tick(){const n=new Date();document.getElementById('clock').textContent=n.getHours().toString().padStart(2,'0')+':'+n.getMinutes().toString().padStart(2,'0')+':'+n.getSeconds().toString().padStart(2,'0');}
+setInterval(tick,1000);tick();
+
+// LATENCY
+setInterval(()=>{document.getElementById('lat').textContent=(6+Math.floor(Math.random()*9))+'ms';},2600);
+
+// CHARTS
+const series={cpu:{id:'cpuVal',cv:'cvCPU',data:[],lo:18,hi:65,color:'#00ff88'},ram:{id:'ramVal',cv:'cvRAM',data:[],lo:52,hi:85,color:'#44aaff'},net:{id:'netVal',cv:'cvNET',data:[],lo:1.2,hi:9.8,color:'#aa88ff',dec:1},llm:{id:'llmVal',cv:'cvLLM',data:[],lo:28,hi:72,color:'#ffcc44'},tok:{id:'tokVal',cv:'cvTOK',data:[],lo:12,hi:98,color:'#00ffcc',dec:1},gpu:{id:'gpuVal',cv:'cvGPU',data:[],lo:42,hi:78,color:'#ff6688'}};
+function rnd(a,b){return a+Math.random()*(b-a);}
+function sparkline(id,data,color){
+  const c=document.getElementById(id);if(!c)return;
+  const w=c.parentElement.clientWidth,h=36;c.width=w;c.height=h;
+  const ctx=c.getContext('2d');ctx.clearRect(0,0,w,h);
+  if(data.length<2)return;
+  const mn=Math.min(...data),mx=Math.max(...data),rng=mx-mn||1;
+  ctx.strokeStyle=color;ctx.lineWidth=1.5;ctx.shadowColor=color;ctx.shadowBlur=5;
+  ctx.beginPath();
+  data.forEach((v,i)=>{const x=(i/(data.length-1))*w,y=h-(((v-mn)/rng)*(h-6)+3);i===0?ctx.moveTo(x,y):ctx.lineTo(x,y);});
+  ctx.stroke();
+  ctx.shadowBlur=0;ctx.lineTo(w,h);ctx.lineTo(0,h);ctx.closePath();ctx.fillStyle=color+'14';ctx.fill();
+  ctx.strokeStyle='#ffffff07';ctx.lineWidth=1;
+  [0.33,0.67].forEach(t=>{ctx.beginPath();ctx.moveTo(0,t*h);ctx.lineTo(w,t*h);ctx.stroke();});
+}
+function updateAll(){
+  for(const k in series){
+    const s=series[k];const v=rnd(s.lo,s.hi);
+    s.data.push(v);if(s.data.length>30)s.data.shift();
+    document.getElementById(s.id).textContent=s.dec?v.toFixed(1):Math.round(v);
+    sparkline(s.cv,s.data,s.color);
+  }
+}
+for(let i=0;i<28;i++)for(const k in series){const s=series[k];s.data.push(rnd(s.lo,s.hi));}
+updateAll();setInterval(updateAll,1400);
+window.addEventListener('resize',updateAll);
+
+// CONNECTIONS
+const conns=[
+  {n:'IBM REGIONAL HUB (LA)',m:'Business Architecture · WatsonX',r:'4.2k/s',c:7},
+  {n:'UTN CASEROS',m:'AI Labs · Open Innovation',r:'1.1k/s',c:3},
+  {n:'FUNDACIÓN BARCELÓ',m:'Biotech · HealthTech Labs',r:'0.8k/s',c:2},
+  {n:'ORACLE CLOUD (OCI)',m:'Enterprise Infra · Startups',r:'2.3k/s',c:5},
+  {n:'MIT 100K LATAM',m:'Jury · Startup Evaluation',r:'0.4k/s',c:1},
+  {n:'NASA / UNDP / PNUD',m:'Tech Evaluator Node',r:'0.3k/s',c:1},
+  {n:'JIN — JAPAN INNOV. NETWORK',m:'HighTech Startup Advisor',r:'0.6k/s',c:2},
+];
+const cl=document.getElementById('connList');
+conns.forEach((c,i)=>{const d=document.createElement('div');d.className='conn-item';d.innerHTML=`<div class="conn-left"><div class="dot" style="width:5px;height:5px;animation-delay:${(i*.3).toFixed(1)}s"></div><div><div class="conn-name">${c.n}</div><div class="conn-meta">${c.m}</div></div></div><div class="conn-right"><span class="conn-rate">${c.r}</span><span class="conn-count">${c.c}</span></div>`;cl.appendChild(d);});
+
+// SKILLS
+const skills=[
+  {n:'AI & GEN AI (WatsonX / DeepSeek)',p:92,c:''},
+  {n:'Cloud Architecture (IBM/Oracle/AWS)',p:88,c:'b'},
+  {n:'Digital Transformation Strategy',p:95,c:''},
+  {n:'GovTech & Public Policy Innovation',p:90,c:'p'},
+  {n:'Startup Ecosystems & Mentorship',p:87,c:'y'},
+  {n:'Kubernetes / Docker / DevOps',p:78,c:'b'},
+  {n:'Blockchain & DeFi',p:72,c:'p'},
+];
+const sl=document.getElementById('skillList');
+skills.forEach(s=>{const d=document.createElement('div');d.className='skill-item';d.innerHTML=`<div class="skill-name">${s.n}<span>${s.p}%</span></div><div class="skill-bar-bg"><div class="skill-bar ${s.c}" data-w="${s.p}"></div></div>`;sl.appendChild(d);});
+setTimeout(()=>{document.querySelectorAll('.skill-bar').forEach(b=>{b.style.width=b.dataset.w+'%';});},500);
+
+// AWARDS
+const awards=[
+  {s:'◆',t:'MIT 100K LATAM — Official Jury',y:'2021 & 2022'},
+  {s:'▲',t:'Winner — Hackathon Miner by Unearthed',y:'2017'},
+  {s:'▲',t:'Winner — Telefónica Open Future La Catedral',y:'2016'},
+  {s:'▲',t:'Winner — JWEF +INNOVACTION',y:'2015'},
+  {s:'◆',t:'Winner — INCUBA Technologic (BA Gov)',y:'2017'},
+  {s:'○',t:'Finalist — E4E Best Startup Competition',y:''},
+  {s:'○',t:'Finalist — Naves Competition',y:'2016'},
+  {s:'◈',t:'IA LATAM — Member Founder',y:''},
+  {s:'◈',t:'U4SSC · ONU — Integrated City Solutions',y:''},
+];
+const al=document.getElementById('awardsList');
+awards.forEach(a=>{const d=document.createElement('div');d.className='award-item';d.innerHTML=`<span class="award-sym">${a.s}</span><div><div class="award-text">${a.t}</div>${a.y?`<div class="award-year">${a.y}</div>`:''}</div>`;al.appendChild(d);});
+
+// TOOLTIP
+const tt=document.getElementById('tt');
+document.querySelectorAll('[data-tip]').forEach(n=>{
+  n.addEventListener('mousemove',e=>{tt.textContent=n.dataset.tip;tt.style.left=(e.clientX+14)+'px';tt.style.top=(e.clientY-8)+'px';tt.classList.add('show');});
+  n.addEventListener('mouseleave',()=>tt.classList.remove('show'));
+});
+
+// ═══ ONNIA CHAT — calls /api/chat (Vercel Function, API key is server-side) ═══
+const conversationHistory = [];
+const chatLog = document.getElementById('chatLog');
+const typingEl = document.getElementById('typing');
+
+function addMsg(role, html, delay = 0) {
+  return new Promise(res => setTimeout(() => {
+    const d = document.createElement('div'); d.className = 'cmsg';
+    const labels = { agent: '[ ONNIA AGENT ]', user: '[ YOU ]', sys: '[ SYSTEM ]' };
+    d.innerHTML = `<div class="cmsg-from ${role}">${labels[role]}</div><div class="cmsg-body ${role}">${html}</div>`;
+    chatLog.appendChild(d); chatLog.scrollTop = chatLog.scrollHeight; res();
+  }, delay));
+}
+
+async function askQ(q) {
+  if (!q.trim()) return;
+  await addMsg('user', q);
+  typingEl.classList.add('show');
+  conversationHistory.push({ role: 'user', content: q });
+  try {
+    const res = await fetch('/api/chat', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ messages: conversationHistory }),
+    });
+    const data = await res.json();
+    const reply = data.reply || '[ ERROR ] No response from ONNIA node.';
+    conversationHistory.push({ role: 'assistant', content: reply });
+    typingEl.classList.remove('show');
+    await addMsg('agent', reply.replace(/\n/g, '<br>'));
+  } catch (e) {
+    typingEl.classList.remove('show');
+    await addMsg('agent', '[ ERROR ] Connection to ONNIA node failed. Check infrastructure status.');
+  }
+}
+
+(async () => {
+  await addMsg('sys', 'ONNIA AGENT INITIALIZING...', 300);
+  await addMsg('sys', 'PROFILE DATABASE CONNECTED · CASEROS NODE ONLINE', 700);
+  await addMsg('sys', 'VERCEL FUNCTION ACTIVE · API KEY SECURED · ALL SYSTEMS GO', 500);
+  await addMsg('agent', `[ AGENT ] Welcome. I'm <b>ONNIA</b> — Leandro's AI agent. His 20+ year career spans AI, digital transformation, GovTech and entrepreneurship across LATAM, Europe &amp; Japan (JIN). Type any question or use the shortcuts below.`, 700);
+})();
+
+const inp = document.getElementById('chatInput');
+inp.addEventListener('keydown', e => { if (e.key === 'Enter' && inp.value.trim()) { askQ(inp.value.trim()); inp.value = ''; } });
+</script>
+</body>
+</html>
