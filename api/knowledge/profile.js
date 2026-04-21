@@ -54,6 +54,12 @@ EXPERIENCE:
    - Strategic advisory bridging Japanese innovation ecosystem with LATAM
    - Technology assessment & business model validation
 
+10. IBM — Electronics Intern (Aug 1997–Dec 1997, 5 months) | Buenos Aires, Argentina
+    - Contrato de prácticas — first professional experience
+    - Repair technician for low and medium voltage switching sources
+    - Monitor and PC power supply repairs
+    - Internship completed at the end of sixth year of high school
+
 TEACHING: Professor UTN (Open Innovation LATAM, 2023), Fundación Barceló (AI HealthTech, 2022–present).
 Speaker: Expo Smart City Bogotá, GOJCodeFest Jamaica, Marketing Digital Experience.
 
