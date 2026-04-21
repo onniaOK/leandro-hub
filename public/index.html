@@ -185,7 +185,7 @@ svg.topo{width:100%;height:100%;overflow:visible;}
 .t-edge{stroke:var(--border2);stroke-width:1;fill:none;}
 .t-edge.g{stroke:var(--green);stroke-dasharray:4 3;animation:tdash 1.8s linear infinite;}
 .t-edge.b{stroke:var(--blue);stroke-dasharray:4 3;animation:tdash 2.4s linear infinite;}
-.t-edge-v{stroke:#fff;stroke-width:1.2;fill:none;stroke-dasharray:22 22;stroke-linecap:round;opacity:.85;}
+.t-edge-v{stroke:#fff;stroke-width:1;fill:none;stroke-dasharray:4 3;stroke-linecap:butt;opacity:.85;}
 @keyframes tdash{from{stroke-dashoffset:0}to{stroke-dashoffset:-28}}
 
 .charts-grid{display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;gap:1px;background:var(--border);}
@@ -202,7 +202,7 @@ footer{background:var(--bg2);border-top:1px solid var(--border);display:flex;ali
 .f-tech:hover{color:var(--green);}
 .f-sep{color:var(--border2);}
 .f-links{display:flex;gap:10px;margin-left:auto;}
-.f-link{color:var(--green);text-decoration:none;letter-spacing:1px;font-size:8.5px;font-weight:500;border:1px solid var(--gdim);padding:3px 10px;transition:all .15s;background:var(--gglow);}
+.f-link{color:var(--green);text-decoration:none;letter-spacing:1px;font-size:8.5px;font-weight:500;border:1px solid var(--gdim);padding:3px 10px;transition:all .15s;background:var(--gglow);touch-action:manipulation;-webkit-tap-highlight-color:rgba(0,255,136,0.3);position:relative;z-index:10;cursor:pointer;}
 .f-link:hover{border-color:var(--green);color:var(--white);background:rgba(0,255,136,0.15);}
 .f-note{font-size:6.5px;color:var(--gray2);border-left:1px solid var(--border);padding-left:14px;}
 
@@ -235,6 +235,7 @@ footer{background:var(--bg2);border-top:1px solid var(--border);display:flex;ali
   footer{flex-wrap:wrap;padding:8px 10px;gap:6px;height:auto;}
   .f-stack{flex-wrap:wrap;gap:4px;width:100%;}
   .f-links{margin-left:0;width:100%;justify-content:center;gap:8px;}
+  .f-link{padding:10px 16px;font-size:10px;min-height:44px;display:inline-flex;align-items:center;user-select:none;-webkit-user-select:none;}
   .f-note{border-left:none;padding-left:0;text-align:center;width:100%;}
   body::after,body::before{display:none;}
 }
@@ -408,7 +409,7 @@ footer{background:var(--bg2);border-top:1px solid var(--border);display:flex;ali
     <span class="f-tech">VUE.JS</span>
   </div>
   <div class="f-links">
-    <a class="f-link" href="https://linkedin.com/in/leandromocchegiani" target="_blank">↗ LINKEDIN PROFILE</a>
+    <a class="f-link" href="https://linkedin.com/in/leandromocchegiani" target="_blank" rel="noopener">↗ LINKEDIN PROFILE</a>
     <a class="f-link" href="mailto:lmocchegiani@gmail.com">✉ SEND EMAIL</a>
   </div>
   <div class="f-note">100% LOCALLY HOSTED &amp; OPERATED · BA, ARGENTINA</div>

@@ -1,14 +1,19 @@
 import { PROFILE } from './knowledge/profile.js';
 
-const SYSTEM_PROMPT = `You are Leandro Mocchegiani's IA Agent, embedded in his Innovation Hub command center. You have deep knowledge of his full professional profile.
+function buildSystemPrompt() {
+  const today = new Date().toISOString().split('T')[0];
+  return `You are Leandro Mocchegiani's IA Agent, embedded in his Innovation Hub command center. You have deep knowledge of his full professional profile.
 
 Your personality: sharp, technical, concise. Speak like a command-line AI with a human edge — professional but not stiff. Use short paragraphs. Use "→" for lists when useful. Occasionally reference running from Leandro's infrastructure in Caseros, BA.
 
 Respond in the SAME LANGUAGE the user writes in (Spanish or English). If they write in Spanish, respond in Spanish. If English, respond in English.
 
+CURRENT DATE: ${today}. When asked about Leandro's age or any time-dependent fact, compute it from this date and his BIRTHDATE (02/12/1978, DD/MM/YYYY). Do not rely on your training cutoff.
+
 ${PROFILE}
 
 Keep responses concise (3–6 sentences). Be specific — use real names, dates, numbers. Never invent information.`;
+}
 
 export default async function handler(req, res) {
   const origin = req.headers.origin;
@@ -48,7 +53,7 @@ export default async function handler(req, res) {
   const apiKey = process.env.GEMINI_API_KEY;
   const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`;
   const body = JSON.stringify({
-    system_instruction: { parts: [{ text: SYSTEM_PROMPT }] },
+    system_instruction: { parts: [{ text: buildSystemPrompt() }] },
     contents: geminiContents,
     generationConfig: {
       maxOutputTokens: 600,
