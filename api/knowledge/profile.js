@@ -4,6 +4,18 @@ TITLE: Digital Innovator | AI Strategy & Digital Transformation Consultant | Eme
 
 SUMMARY: Senior Consultant with 20+ years at the intersection of technology, digital economy, and business development across LATAM, Europe & Asia. Expert in Generative AI, Cloud, Blockchain, and GovTech. Professor at UTN and Fundación Barceló. HighTech Startup Advisor at JIN Japan Innovation Network. Evaluator for NASA, UNDP, MIT, GOJCodeFest Jamaica, Itaipú Brasil-Paraguay.
 
+BIRTHDATE: 02/12/1978
+
+Place of Birth: Buenos Aires, Argentina
+
+Citizenship: Argentina, Italy
+
+Passions: Technology, cinema, travel, his kids, River Plate, cooking
+
+Live 3 years in Barcelona, Spain
+
+travelled to 30+ countries
+
 EXPERIENCE:
 1. IBM — Business Architect (Jun 2021–Present) | Buenos Aires
    - Lead architecture strategy & tech adoption for ICBC banking industry
@@ -61,4 +73,22 @@ LANGUAGES: Spanish (native), English (fluent), Portuguese (fluent), Italian (flu
 
 SKILLS: Digital Transformation · GovTech · Open Innovation · Gen AI · Cloud Architecture · Kubernetes · Docker · DeepSeek R1 · Qwen 2.5 · Blockchain · Business Architecture · Startup Ecosystems · Public Policy
 
-CONTACT: lmocchegiani@gmail.com | linkedin.com/in/leandromocchegiani | Caseros, Buenos Aires, Argentina`;
+CONTACT: lmocchegiani@gmail.com | linkedin.com/in/leandromocchegiani | Caseros, Buenos Aires, Argentina
+
+PERSONAL PRESENTATION:
+From a young age, my life has always been defined by a deep passion for technology, an insatiable curiosity, and a commitment to creating positive change through innovation.
+
+I embarked on my entrepreneurial journey at age 18 and I have founded several businesses since. Yet, the one acceleration point in this journey was a startup focused on smart mobility solutions called Parkool — the first smart parking collaborative platform in LATAM.
+
+I continuously strive to add value through scalable tech solutions. In line with this vision, I actively support and contribute to triple-impact entrepreneurship initiatives. Through courses, conferences, and mentorship, I assist aspiring entrepreneurs in their journey, working closely with startups and fostering innovation in the ecosystem.
+
+Throughout my career, I've had the privilege to work for industry leaders such as IBM, Oracle, Vodafone, and Telefónica (Movistar), both in Europe and Latin America. These experiences have allowed me to witness firsthand how these giants shape and drive technological advancements. Currently, I serve as a Business Architect at IBM, where I collaborate with the banking industry to create digital innovations.
+
+I have experience working in the public sector with expertise in smart cities, participating as a member of the United for Smart Sustainable Cities (U4SSC) working group, having developed a framework for public and open innovation in smart cities called the "City Solutions Palette", and working in public innovation programs. Additionally, I am a founding member of the Red GETEC AR, a social nonprofit that seeks to spread innovation in Argentina.
+
+I firmly believe that by leveraging the power of technology, we can create a more inclusive and sustainable world.
+
+Personal web: mocchegiani.com.ar
+
+RECENT ACTIVITY:
+- NASA International Space Apps Challenge 2025 (Oct 4–5, 2025, Comodoro Rivadavia, Argentina): Mentor and speaker at the world's largest science & technology hackathon. Theme: "Del sur del mundo al universo". Participating entities: CONAE, INVAP, CONICET, Red GTec. 430+ participants, 59 teams, 40+ mentors (Argentina, USA, Australia — in-person and virtual). Delivered a talk on Validation Hacking (rapid prototyping and validation of space-related ideas). As IBM Ambassador, shared the story of IBM–NASA collaboration since the dawn of space exploration.`;
